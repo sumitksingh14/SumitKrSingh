@@ -1,0 +1,142 @@
+.about-section {
+  background: var(--bg-primary);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+/* ─── Photo Column ─── */
+.about-photo-col {
+  display: flex;
+  justify-content: center;
+}
+
+.about-photo-wrap {
+  position: relative;
+  width: 380px;
+  max-width: 100%;
+}
+
+.about-photo {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 16px;
+  filter: grayscale(15%);
+  transition: filter var(--transition);
+}
+.about-photo:hover {
+  filter: grayscale(0%);
+}
+
+/* Orange frame accent */
+.about-photo-wrap::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  right: 12px;
+  bottom: 12px;
+  border: 2px solid var(--accent);
+  border-radius: 16px;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+/* Experience badge */
+.about-photo-badge {
+  position: absolute;
+  bottom: 1.5rem;
+  right: -1.5rem;
+  background: var(--accent);
+  color: white;
+  border-radius: 12px;
+  padding: 0.85rem 1.25rem;
+  text-align: center;
+  box-shadow: 0 8px 24px var(--accent-glow);
+}
+.badge-number {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.badge-label {
+  font-size: 0.75rem;
+  opacity: 0.9;
+  line-height: 1.3;
+}
+
+/* ─── Content ─── */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.about-text {
+  font-size: 0.97rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+.about-text strong {
+  color: var(--text-primary);
+}
+
+/* Skills Chips */
+.about-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0.5rem 0;
+}
+
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  border-radius: 99px;
+  transition: all var(--transition-fast);
+}
+.skill-chip svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.skill-chip:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+.about-cta {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .about-photo-wrap {
+    width: 300px;
+  }
+  .about-photo {
+    height: 360px;
+  }
+  .about-photo-badge {
+    right: 0;
+  }
+}

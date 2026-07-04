@@ -1,0 +1,267 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 100px 0 80px;
+}
+
+/* ─── BG Decoration ─── */
+.hero-bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-bg-circle--1 {
+  width: 520px;
+  height: 520px;
+  right: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: radial-gradient(circle, rgba(255,107,43,0.10) 0%, transparent 70%);
+}
+.hero-bg-circle--2 {
+  width: 300px;
+  height: 300px;
+  left: -100px;
+  bottom: 10%;
+  background: radial-gradient(circle, rgba(255,107,43,0.06) 0%, transparent 70%);
+}
+
+/* ─── Layout ─── */
+.hero-container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 4rem;
+}
+
+/* ─── Content ─── */
+.hero-content {
+  max-width: 580px;
+}
+
+.hero-greeting {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.02em;
+  animation-delay: 0.1s;
+}
+
+.hero-name {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  animation-delay: 0.15s;
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  animation-delay: 0.2s;
+}
+
+.hero-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 1.75rem;
+  animation-delay: 0.25s;
+}
+
+/* ─── Socials ─── */
+.hero-socials {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  animation-delay: 0.3s;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  transition: all var(--transition);
+}
+.social-icon:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-light);
+  transform: translateY(-2px);
+}
+
+/* ─── CTAs ─── */
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  animation-delay: 0.35s;
+}
+
+/* ─── Stats ─── */
+.hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem 2rem;
+  animation-delay: 0.4s;
+  width: fit-content;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.stat-number {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+  text-align: center;
+}
+.stat-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--border);
+}
+
+/* ─── Photo ─── */
+.hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation-delay: 0.2s;
+}
+
+.hero-photo-wrap {
+  position: relative;
+  width: 360px;
+  height: 360px;
+}
+
+.hero-photo-ring {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 107, 43, 0.4);
+  animation: spin-slow 20s linear infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.hero-photo-circle {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 3px solid rgba(255,107,43,0.25);
+  box-shadow: 0 0 60px rgba(255, 107, 43, 0.15), 0 0 120px rgba(255, 107, 43, 0.07);
+}
+
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  filter: grayscale(20%);
+  transition: filter var(--transition);
+}
+.hero-photo:hover {
+  filter: grayscale(0%);
+}
+
+/* ─── Scroll Indicator ─── */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  animation: bounce 2s ease-in-out infinite;
+}
+.scroll-indicator:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(6px); }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-content {
+    max-width: 100%;
+    order: 2;
+  }
+  .hero-visual {
+    order: 1;
+  }
+  .hero-socials, .hero-actions {
+    justify-content: center;
+  }
+  .hero-stats {
+    margin: 0 auto;
+  }
+  .hero-photo-wrap {
+    width: 260px;
+    height: 260px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-stats {
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+  }
+  .stat-number {
+    font-size: 1.5rem;
+  }
+}

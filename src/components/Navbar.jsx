@@ -1,27 +1,47 @@
-import { NavLink } from 'react-router-dom';
-import { Briefcase, Code, User, Grid } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import './Navbar.css';
 
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollTo = (id) => {
+    setMenuOpen(false);
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
-        <NavLink to="/" className="navbar-brand">
-          <span className="gradient-text">Sumit K. Singh</span>
-        </NavLink>
-        <div className="nav-links">
-          <NavLink to="/" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')} end>
-            <User size={18} /> <span>Profile</span>
-          </NavLink>
-          <NavLink to="/experience" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-            <Briefcase size={18} /> <span>Experience</span>
-          </NavLink>
-          <NavLink to="/skills" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-            <Code size={18} /> <span>Skills</span>
-          </NavLink>
-          <NavLink to="/projects" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-            <Grid size={18} /> <span>Projects</span>
-          </NavLink>
+        <div className="navbar-logo" onClick={() => scrollTo('home')}>
+          <span className="logo-text">SKS<span className="logo-dot">.</span></span>
+        </div>
+
+        <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
+          <button onClick={() => scrollTo('home')}>Home</button>
+          <button onClick={() => scrollTo('services')}>Services</button>
+          <button onClick={() => scrollTo('about')}>About me</button>
+          <button onClick={() => scrollTo('portfolio')}>Portfolio</button>
+          <button onClick={() => scrollTo('contact')}>Contact me</button>
+        </div>
+
+        <div className="navbar-actions">
+          <a href="mailto:sumit.kr.singh14@gmail.com" className="btn btn-primary hire-btn">
+            Hire Me
+          </a>
+          <button
+            className={`hamburger ${menuOpen ? 'active' : ''}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span /><span /><span />
+          </button>
         </div>
       </div>
     </nav>
