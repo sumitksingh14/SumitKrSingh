@@ -30,7 +30,7 @@ const Hero = () => {
           {/* Social Icons */}
           <div className="hero-socials fade-up">
             <a
-              href="https://linkedin.com/in/sumitksingh14"
+              href="https://linkedin.com/in/sumitsingh14"
               target="_blank"
               rel="noopener noreferrer"
               className="social-icon"
