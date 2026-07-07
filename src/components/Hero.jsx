@@ -12,11 +12,12 @@ const Hero = () => {
               Hi, I'm Sumit <span className="animate-waving-hand">👋</span>
             </h1>
             <p className="hero-description">
-              I'm a seasoned Technical Program Manager &amp; Mobile Delivery Leader with
-              16+ years delivering end-to-end iOS, Android &amp; React Native solutions
-              for global enterprises in Fintech, Banking &amp; Insurance. I bridge deep
-              technical expertise with strategic leadership to consistently deliver
-              high-impact digital products.
+              I'm a results-driven Program Manager &amp; Mobile Technical Delivery Leader with over 16 years of experience in driving
+              complex, multi-team programs and delivering scalable mobile solutions for global enterprises. I specialize in
+              orchestrating end-to-end delivery across iOS, Android, and React Native platforms, leveraging expertise in mobile
+              architecture, agile execution, and cross-functional leadership. My proven track record includes managing large,
+              high-impact programs, optimizing delivery processes, and aligning engineering outcomes with business goals. I excel
+              at executing multiple concurrent projects with a strong focus on quality, performance, and operational efficiency.
             </p>
           </div>
 
@@ -30,7 +31,7 @@ const Hero = () => {
                 <span className="availability-dot-ping" />
                 <span className="availability-dot" />
               </div>
-              <p>Available for new projects</p>
+              <p>Actively exploring new opportunities...</p>
             </div>
           </div>
 
