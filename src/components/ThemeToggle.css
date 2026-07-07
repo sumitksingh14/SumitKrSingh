@@ -1,0 +1,14 @@
+﻿.theme-toggle {
+  color: var(--text);
+  transition: color 200ms ease, transform 150ms ease;
+  border-radius: 8px;
+}
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+@media (hover: none) {
+  .theme-toggle {
+    padding: 12px;
+  }
+}
