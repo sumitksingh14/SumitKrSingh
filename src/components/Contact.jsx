@@ -70,7 +70,7 @@ const Contact = () => {
 
             <div className="contact-socials">
               <a
-                href="https://linkedin.com/in/sumitksingh14"
+                href="https://linkedin.com/in/sumitsingh14"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact-social-btn"
