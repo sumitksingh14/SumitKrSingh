@@ -1,71 +1,58 @@
 import {
+  Smartphone,
   MonitorSmartphone,
   Settings2,
   Layout,
   Users,
   GitBranch,
   Shield,
+  Code2,
+  Layers,
+  Database,
+  BarChart3,
+  Globe,
+  Kanban,
+  MessageSquare,
+  Cloud,
+  FileCode2,
 } from 'lucide-react';
 import './Services.css';
 
-const services = [
-  {
-    icon: <MonitorSmartphone size={36} />,
-    title: 'Mobile Delivery',
-    description:
-      'End-to-end delivery of iOS, Android & React Native applications, from architecture to production launch.',
-  },
-  {
-    icon: <Settings2 size={36} />,
-    title: 'Program Management',
-    description:
-      'Orchestrating complex, large-scale programs with strong governance, risk management & cross-functional execution.',
-  },
-  {
-    icon: <Layout size={36} />,
-    title: 'Technical Architecture',
-    description:
-      'Solution design, platform strategy & scalable architecture across MVC, MVP, MVVM & VIPER patterns.',
-  },
-  {
-    icon: <Users size={36} />,
-    title: 'Team Leadership',
-    description:
-      'Building & mentoring high-performing distributed teams aligned with business goals and delivery timelines.',
-  },
-  {
-    icon: <GitBranch size={36} />,
-    title: 'Agile Coaching',
-    description:
-      'Implementing Agile & Scrum methodologies to optimise workflows, sprint delivery & release cadence.',
-  },
-  {
-    icon: <Shield size={36} />,
-    title: 'API Governance',
-    description:
-      'Standardising API design, security, lifecycle, monetisation & automated governance across the enterprise.',
-  },
+const skills = [
+  { icon: <Smartphone size={32} />, label: 'iOS' },
+  { icon: <MonitorSmartphone size={32} />, label: 'Android' },
+  { icon: <Code2 size={32} />, label: 'React Native' },
+  { icon: <FileCode2 size={32} />, label: 'Swift' },
+  { icon: <Layers size={32} />, label: 'Kotlin' },
+  { icon: <Layout size={32} />, label: 'Architecture' },
+  { icon: <Settings2 size={32} />, label: 'Program Mgmt' },
+  { icon: <Kanban size={32} />, label: 'Agile / Scrum' },
+  { icon: <Users size={32} />, label: 'Leadership' },
+  { icon: <Shield size={32} />, label: 'API Governance' },
+  { icon: <GitBranch size={32} />, label: 'CI/CD' },
+  { icon: <Database size={32} />, label: 'Databases' },
+  { icon: <Cloud size={32} />, label: 'Cloud' },
+  { icon: <BarChart3 size={32} />, label: 'Analytics' },
+  { icon: <Globe size={32} />, label: 'REST APIs' },
+  { icon: <MessageSquare size={32} />, label: 'Stakeholders' },
 ];
 
-const Services = () => {
+const Skills = () => {
   return (
-    <section id="services" className="section services-section">
+    <section id="skills" className="section skills-section">
       <div className="container">
         <div className="section-header-center">
-          <p className="section-label">What I Offer</p>
-          <h2 className="section-title">Services</h2>
+          <span className="section-label">Skills</span>
           <p className="section-subtitle center-text">
-            Bridging deep technical expertise with strategic leadership to deliver
-            high-impact digital products and programmes.
+            The skills, tools and technologies I am really good at:
           </p>
         </div>
 
-        <div className="services-grid">
-          {services.map((service, idx) => (
-            <div key={idx} className="service-card card">
-              <div className="service-icon">{service.icon}</div>
-              <h3 className="service-title">{service.title}</h3>
-              <p className="service-description">{service.description}</p>
+        <div className="skills-grid">
+          {skills.map((skill, idx) => (
+            <div key={idx} className="skill-item">
+              <div className="skill-icon">{skill.icon}</div>
+              <p className="skill-label">{skill.label}</p>
             </div>
           ))}
         </div>
@@ -74,4 +61,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default Skills;

@@ -1,52 +1,49 @@
 .navbar {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 1.25rem 0;
-  transition: background var(--transition), box-shadow var(--transition), padding var(--transition);
+  background: var(--bg-primary);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--transition), background var(--transition);
 }
 
 .navbar.scrolled {
-  background: rgba(26, 26, 26, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
-  padding: 0.85rem 0;
+  border-bottom-color: var(--border);
 }
 
 .navbar-container {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 1rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 /* ─── Logo ─── */
 .navbar-logo {
-  cursor: pointer;
   flex-shrink: 0;
+  text-decoration: none;
 }
 .logo-text {
-  font-family: var(--font-heading);
   font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--accent);
-  letter-spacing: -0.02em;
-}
-.logo-dot {
+  font-weight: 700;
   color: var(--text-primary);
+  letter-spacing: -0.02em;
 }
 
 /* ─── Nav Links ─── */
 .nav-links {
-  display: flex;
+  display: none;
   align-items: center;
-  gap: 0.25rem;
+  gap: 1.5rem;
+}
+
+.nav-links .nav-close-btn {
+  display: none;
 }
 
 .nav-links button {
@@ -54,17 +51,15 @@
   border: none;
   cursor: pointer;
   font-family: var(--font-primary);
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 500;
   color: var(--text-secondary);
-  padding: 0.5rem 0.9rem;
-  border-radius: 6px;
-  transition: all var(--transition-fast);
+  padding: 0;
+  transition: color var(--transition-fast);
 }
 
 .nav-links button:hover {
-  color: var(--accent);
-  background: var(--accent-light);
+  color: var(--text-primary);
 }
 
 /* ─── Actions ─── */
@@ -75,68 +70,101 @@
   flex-shrink: 0;
 }
 
-.hire-btn {
-  padding: 0.6rem 1.4rem;
-  font-size: 0.9rem;
-  border-radius: 6px;
+.nav-divider {
+  width: 1px;
+  height: 1.5rem;
+  background: var(--border);
+  display: none;
+}
+
+.download-cv-btn {
+  display: none;
+  padding: 0.375rem 1rem;
+  font-size: 0.875rem;
+  border-radius: 0.75rem;
 }
 
 /* ─── Hamburger ─── */
 .hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
-}
-.hamburger span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: var(--text-primary);
-  border-radius: 2px;
+  padding: 0.375rem;
+  border-radius: 0.5rem;
+  color: var(--text-secondary);
   transition: all var(--transition-fast);
 }
-.hamburger.active span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-.hamburger.active span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+.hamburger:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
-/* ─── Mobile ─── */
-@media (max-width: 768px) {
-  .hamburger {
+/* ─── Desktop ─── */
+@media (min-width: 768px) {
+  .nav-links {
     display: flex;
   }
+  .nav-divider {
+    display: block;
+  }
+  .download-cv-btn {
+    display: inline-flex;
+  }
+  .hamburger {
+    display: none;
+  }
+}
 
+/* ─── Mobile Drawer ─── */
+@media (max-width: 767px) {
   .nav-links {
     position: fixed;
-    inset: 0 0 0 30%;
+    inset: 0;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
-    padding: 5rem 2rem 2rem;
-    background: rgba(26, 26, 26, 0.98);
-    backdrop-filter: blur(20px);
+    gap: 0;
+    padding: 1rem;
+    background: var(--bg-primary);
+    z-index: 999;
+    display: flex;
     transform: translateX(100%);
     transition: transform var(--transition);
-    z-index: 999;
+    border-left: 1px solid var(--border);
   }
 
   .nav-links.open {
     transform: translateX(0);
   }
 
-  .nav-links button {
-    font-size: 1.1rem;
-    padding: 0.6rem 0;
+  .nav-links .nav-close-btn {
+    display: flex;
+    align-self: flex-end;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.375rem;
+    border-radius: 0.5rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    transition: all var(--transition-fast);
+  }
+  .nav-links .nav-close-btn:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+
+  .nav-links button:not(.nav-close-btn) {
+    font-size: 1.125rem;
+    padding: 0.75rem 0;
     width: 100%;
     text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .download-cv-btn {
+    display: none;
   }
 }

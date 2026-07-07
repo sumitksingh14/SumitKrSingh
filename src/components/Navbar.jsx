@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Download, Menu, X } from 'lucide-react';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -19,28 +20,32 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
-        <div className="navbar-logo" onClick={() => scrollTo('home')}>
-          <span className="logo-text">SKS<span className="logo-dot">.</span></span>
-        </div>
+        <a href="/" className="navbar-logo" onClick={(e) => { e.preventDefault(); scrollTo('home'); }}>
+          <span className="logo-text">&lt;SKS /&gt;</span>
+        </a>
 
         <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-          <button onClick={() => scrollTo('home')}>Home</button>
-          <button onClick={() => scrollTo('services')}>Services</button>
-          <button onClick={() => scrollTo('about')}>About me</button>
-          <button onClick={() => scrollTo('portfolio')}>Portfolio</button>
-          <button onClick={() => scrollTo('contact')}>Contact me</button>
+          <button className="nav-close-btn" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+            <X size={24} />
+          </button>
+          <button onClick={() => scrollTo('about')}>About</button>
+          <button onClick={() => scrollTo('work')}>Work</button>
+          <button onClick={() => scrollTo('testimonials')}>Testimonials</button>
+          <button onClick={() => scrollTo('contact')}>Contact</button>
         </div>
 
         <div className="navbar-actions">
-          <a href="mailto:sumit.kr.singh14@gmail.com" className="btn btn-primary hire-btn">
-            Hire Me
+          <div className="nav-divider" />
+          <a href="/resume.pdf" download className="btn btn-primary download-cv-btn">
+            <Download size={16} />
+            Download CV
           </a>
           <button
-            className={`hamburger ${menuOpen ? 'active' : ''}`}
+            className="hamburger"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
-            <span /><span /><span />
+            <Menu size={24} />
           </button>
         </div>
       </div>

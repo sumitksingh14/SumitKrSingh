@@ -1,71 +1,52 @@
-.services-section {
-  background: var(--bg-secondary);
+.skills-section {
+  background: var(--bg-primary);
 }
 
-.section-header-center {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.center-text {
-  margin: 0 auto;
-}
-
-.services-grid {
+.skills-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  gap: 1rem;
+  row-gap: 2rem;
 }
 
-.service-card {
+.skill-item {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
-  cursor: default;
-}
-
-.service-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 12px;
-  background: var(--accent-light);
-  display: flex;
   align-items: center;
-  justify-content: center;
-  color: var(--accent);
-  transition: all var(--transition);
-  flex-shrink: 0;
+  gap: 0.5rem;
 }
 
-.service-card:hover .service-icon {
-  background: var(--accent);
-  color: white;
-  transform: scale(1.05);
-}
-
-.service-title {
-  font-family: var(--font-heading);
-  font-size: 1.15rem;
-  font-weight: 700;
+.skill-icon {
   color: var(--text-primary);
+  transition: color var(--transition-fast);
 }
 
-.service-description {
-  font-size: 0.92rem;
+.skill-item:hover .skill-icon {
   color: var(--text-secondary);
-  line-height: 1.7;
+}
+
+.skill-label {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  text-align: center;
 }
 
 /* ─── Responsive ─── */
-@media (max-width: 900px) {
-  .services-grid {
-    grid-template-columns: repeat(2, 1fr);
+@media (min-width: 768px) {
+  .skills-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2rem;
+    row-gap: 2.5rem;
+  }
+
+  .skill-label {
+    font-size: 1.125rem;
   }
 }
 
-@media (max-width: 560px) {
-  .services-grid {
-    grid-template-columns: 1fr;
+@media (min-width: 1024px) {
+  .skills-grid {
+    grid-template-columns: repeat(8, 1fr);
+    row-gap: 3rem;
   }
 }
