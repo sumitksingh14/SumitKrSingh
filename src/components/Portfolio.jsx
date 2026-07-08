@@ -3,26 +3,67 @@ import './Portfolio.css';
 
 const projects = [
   {
-    title: 'API Guardrails Program',
+    title: 'OneHub Mobile App (Enterprise Digital Workspace)',
+    image: '/images/projects/onehub.png',
     description:
-      'Led enterprise API Guardrails Program — standardised API design, security, lifecycle & built the organisation\'s first API monetisation model cutting review cycles by 30–50%.',
-    tags: ['Program Management', 'API Design', 'Governance', 'Security', 'Monetisation'],
+      'Led the end-to-end delivery of a secure enterprise mobile platform for Catalent, integrating Salesforce and Azure AD. Orchestrated architecture, managed cross-functional teams, and ensured engineering excellence via CI/CD, automated testing, and strict security compliance.',
+    tags: ['Solution Architecture', 'Mobile Enterprise', 'Azure AD', 'Salesforce', 'Technical Leadership'],
     link: null,
   },
   {
-    title: 'US Retail Mobile App',
+    title: 'Shoppertrack Retail App',
+    image: '/images/projects/shoppertrack.png',
     description:
-      'End-to-end technical & functional delivery of a US-based retail mobile application, coordinating iOS, Android & QA resources with active stakeholder management.',
-    tags: ['iOS', 'Android', 'Retail', 'Stakeholder Management', 'QA'],
+      'Managed technical and functional delivery of a US-based retail mobile app for Johnson Controls. Aligned business objectives with technology execution, optimizing resource utilization and managing cross-functional iOS, Android, and QA teams.',
+    tags: ['Technical Project Management', 'iOS', 'Android', 'Stakeholder Management', 'QA'],
+    link: null,
+  },
+  {
+    title: 'Enterprise API Guardrails & Monetization',
+    image: '/images/projects/api_guardrails.png',
+    description:
+      'Spearheaded the API Guardrails Program at NiCE Interactive Solutions, building the first API monetization model and automating governance. Reduced review cycles by 50% and improved developer experience through centralized documentation and analytics dashboards.',
+    tags: ['API Governance', 'Monetization Strategy', 'Program Management', 'Security', 'Developer Experience'],
     link: null,
   },
   {
     title: 'Nomo Fintech Platform',
+    image: '/images/projects/nomo_fintech.png',
     description:
-      'Technical Project Manager for a UK-based Fintech mobile platform built on React Native & Node.js, managing the full delivery lifecycle and client relationship.',
-    tags: ['React Native', 'Node.js', 'Fintech', 'Agile', 'UK Banking'],
+      'Directed delivery of a UK-based Fintech mobile platform built on React Native and Node.js. Managed client relationships, financial budgeting, and technical process improvements that optimized resources and increased overall delivery efficiency.',
+    tags: ['Fintech', 'React Native', 'Node.js', 'Delivery Management', 'Process Optimization'],
     link: null,
   },
+  {
+    title: 'Citibank Digital Mobile Framework',
+    image: '/images/projects/citibank.png',
+    description:
+      'Architected and led the digital mobile transformation for Citibank across iOS, Android, React Native, and AngularJS. Oversaw solution design, technical delivery, and architectural reviews while coordinating multifaceted development activities.',
+    tags: ['Mobile Architecture', 'Solution Design', 'Banking & Finance', 'React Native', 'Client Management'],
+    link: null,
+  },
+  {
+    title: 'The Cooperative Bank Mobile Transformation',
+    image: '/images/projects/coop_bank.png',
+    description:
+      'Directed the digital migration from a legacy Kony implementation to a modern native Swift and Kotlin architecture. Established a Mobile Center of Excellence (CoE) and managed end-to-end technical delivery and solution design.',
+    tags: ['Digital Transformation', 'Native iOS & Android', 'Swift & Kotlin', 'Mobile CoE', 'Banking Apps'],
+    link: null,
+  },
+  {
+    title: 'iCAT2 Timesheet & Expense App',
+    description:
+      'Developed an iOS mobile application for a leading US-based manufacturing and finance client, enabling field engineers to efficiently log time and expenses directly into enterprise systems.',
+    tags: ['iOS Development', 'Enterprise Mobility', 'Field Service'],
+    link: null,
+  },
+  {
+    title: 'Chubb FNOL (First Notice of Loss)',
+    description:
+      'Engineered an iOS application for a US-based insurance firm, allowing users to immediately notify the insurer of losses or damage, available natively on the US App Store.',
+    tags: ['iOS Development', 'Insurance Tech', 'Consumer App'],
+    link: null,
+  }
 ];
 
 const Portfolio = () => {
@@ -40,9 +81,13 @@ const Portfolio = () => {
           {projects.map((project, idx) => (
             <div key={idx} className={`project-card card ${idx % 2 !== 0 ? 'reversed' : ''}`}>
               <div className="project-image-col">
-                <div className="project-image-placeholder">
-                  <span className="project-image-text">{project.title}</span>
-                </div>
+                {project.image ? (
+                  <img src={project.image} alt={project.title} className="project-image" />
+                ) : (
+                  <div className="project-image-placeholder">
+                    <span className="project-image-text">{project.title}</span>
+                  </div>
+                )}
               </div>
               <div className="project-content-col">
                 <h3 className="project-title">{project.title}</h3>

@@ -23,8 +23,8 @@
 }
 
 .exp-logo-placeholder {
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
   border-radius: 0.5rem;
   background: var(--bg-secondary);
   display: flex;
@@ -33,6 +33,14 @@
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--text-primary);
+}
+
+.exp-logo-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 0.5rem;
+  object-fit: contain;
+  background-color: #fff; /* White background usually works best for diverse logos */
 }
 
 /* ─── Content ─── */

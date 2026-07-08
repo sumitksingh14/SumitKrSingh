@@ -3,6 +3,7 @@ import './Experience.css';
 const experiences = [
   {
     company: 'Xoriant Corporation Pvt. Ltd.',
+    logo: '/xoriant_logo.jpg',
     title: 'Technical Manager',
     period: 'Jun 2024 – Present',
     points: [
@@ -15,6 +16,7 @@ const experiences = [
   },
   {
     company: 'Capgemini Technology Services India Ltd.',
+    logo: '/capgemini_logo.jpg',
     title: 'Senior Manager',
     period: 'Oct 2013 – Jun 2024',
     points: [
@@ -27,6 +29,7 @@ const experiences = [
   },
   {
     company: 'IGATE Global Solutions',
+    logo: '/igate_logo.jpg',
     title: 'Senior Software Engineer',
     period: 'Jan 2011 – Sep 2013',
     points: [
@@ -39,6 +42,7 @@ const experiences = [
   },
   {
     company: 'Mobicule Technology Pvt. Ltd.',
+    logo: '/mobicule_logo.jpg',
     title: 'Programmer Analyst',
     period: 'Jun 2010 – Jan 2011',
     points: [
@@ -65,7 +69,18 @@ const Experience = () => {
           {experiences.map((exp, idx) => (
             <div key={idx} className="experience-card card">
               <div className="exp-logo-col">
-                <div className="exp-logo-placeholder">
+                <img
+                  src={exp.logo}
+                  alt={`${exp.company} logo`}
+                  className="exp-logo-image"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    if (e.target.nextSibling) {
+                      e.target.nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                <div className="exp-logo-placeholder" style={{ display: 'none' }}>
                   {exp.company.charAt(0)}
                 </div>
               </div>
