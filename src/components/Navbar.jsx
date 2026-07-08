@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Download, Menu, X } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -35,6 +36,7 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-actions">
+          <ThemeToggle />
           <div className="nav-divider" />
           <a href="/resume.pdf" download className="btn btn-primary download-cv-btn">
             <Download size={16} />

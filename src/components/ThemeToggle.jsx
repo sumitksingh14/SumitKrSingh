@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { useTheme } from '../theme/ThemeContext';
 import './ThemeToggle.css';
 
@@ -13,15 +13,6 @@ export default function ThemeToggle({ className = '' }) {
       aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
       title={isDark ? 'Light mode' : 'Dark mode'}
       className={`theme-toggle ${className}`}
-      style={{
-        background: 'transparent',
-        border: 'none',
-        cursor: 'pointer',
-        padding: 8,
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
     >
       {isDark ? (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
