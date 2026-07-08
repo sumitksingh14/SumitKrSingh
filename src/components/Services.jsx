@@ -25,7 +25,7 @@ const skills = [
   { icon: <FileCode2 size={32} />, label: 'Swift' },
   { icon: <Layers size={32} />, label: 'Kotlin' },
   { icon: <Layout size={32} />, label: 'Architecture' },
-  { icon: <Settings2 size={32} />, label: 'Program Mgmt' },
+  { icon: <Settings2 size={32} />, label: 'Program Management' },
   { icon: <Kanban size={32} />, label: 'Agile / Scrum' },
   { icon: <Users size={32} />, label: 'Leadership' },
   { icon: <Shield size={32} />, label: 'API Governance' },
@@ -34,7 +34,7 @@ const skills = [
   { icon: <Cloud size={32} />, label: 'Cloud' },
   { icon: <BarChart3 size={32} />, label: 'Analytics' },
   { icon: <Globe size={32} />, label: 'REST APIs' },
-  { icon: <MessageSquare size={32} />, label: 'Stakeholders' },
+  { icon: <MessageSquare size={32} />, label: 'Stakeholder Management' },
 ];
 
 const Skills = () => {

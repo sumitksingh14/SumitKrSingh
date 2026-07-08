@@ -15,7 +15,7 @@ const Hero = () => {
               Technical Program Manager | Mobile Delivery Leader (iOS, Android,
               React Native) | 16+ Years Orchestrating Enterprise Mobile
               Portfolios &amp; Cross-Functional Engineering Teams. Specialist in
-              Fintech, Banking, and Insurance Domains | Agile &amp; Scalable
+              Fintech, Banking, Retailand Insurance Domains | Agile &amp; Scalable
               Architectures.
             </h3>
             <p className="hero-description">
