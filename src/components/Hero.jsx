@@ -11,13 +11,26 @@ const Hero = () => {
             <h1 className="hero-heading">
               Hi, I'm Sumit <span className="animate-waving-hand">👋</span>
             </h1>
+            <h3 className="hero-subheading">
+              Technical Program Manager | Mobile Delivery Leader (iOS, Android,
+              React Native) | 16+ Years Orchestrating Enterprise Mobile
+              Portfolios &amp; Cross-Functional Engineering Teams. Specialist in
+              Fintech, Banking, and Insurance Domains | Agile &amp; Scalable
+              Architectures.
+            </h3>
             <p className="hero-description">
-              I'm a results-driven Program Manager &amp; Mobile Technical Delivery Leader with over 16 years of experience in driving
-              complex, multi-team programs and delivering scalable mobile solutions for global enterprises. I specialize in
-              orchestrating end-to-end delivery across iOS, Android, and React Native platforms, leveraging expertise in mobile
-              architecture, agile execution, and cross-functional leadership. My proven track record includes managing large,
-              high-impact programs, optimizing delivery processes, and aligning engineering outcomes with business goals. I excel
-              at executing multiple concurrent projects with a strong focus on quality, performance, and operational efficiency.
+              I&apos;m a results-driven Program Manager &amp; Mobile Technical
+              Delivery Leader with over 16 years of experience in driving
+              complex, multi-team programs and delivering scalable mobile
+              solutions for global enterprises. I specialize in orchestrating
+              end-to-end delivery across iOS, Android, and React Native
+              platforms, leveraging expertise in mobile architecture, agile
+              execution, and cross-functional leadership. My proven track record
+              includes managing large, high-impact programs, optimizing
+              delivery processes, and aligning engineering outcomes with
+              business goals. I excel at executing multiple concurrent
+              projects with a strong focus on quality, performance, and
+              operational efficiency.
             </p>
           </div>
 
@@ -68,7 +81,7 @@ const Hero = () => {
         <div className="hero-visual fade-up">
           <div className="hero-photo-wrap">
             <img
-              src="/profile.jpg"
+              src="/sumitsingh.png"
               alt="Headshot of Sumit Kumar Singh"
               className="hero-photo"
             />

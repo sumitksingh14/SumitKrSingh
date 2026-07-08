@@ -153,6 +153,12 @@
     font-size: clamp(2.5rem, 4vw, 3.75rem);
   }
 
+  .hero-subheading {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
   .hero-photo-wrap {
     width: 320px;
     height: 360px;

@@ -13,7 +13,7 @@ const About = () => {
           <div className="about-photo-col">
             <div className="about-photo-wrap">
               <img
-                src="/profile.jpg"
+                src="/sumit_casual.png"
                 alt="Full pose of Sumit Kumar Singh"
                 className="about-photo"
               />
