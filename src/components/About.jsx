@@ -53,12 +53,12 @@ const About = () => {
 
             <div className="about-quick-facts">
               <ul className="about-list">
-                <li>B.Tech in Computer Science</li>
+                <li>Masters in Computer Applications</li>
                 <li>16+ years in tech industry</li>
               </ul>
               <ul className="about-list">
                 <li>Agile & Scrum practitioner</li>
-                <li>Mobile & Fintech specialist</li>
+                <li>Program Management & Mobile Technology Specialist</li>
               </ul>
             </div>
 
