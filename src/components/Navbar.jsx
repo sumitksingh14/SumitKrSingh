@@ -30,6 +30,8 @@ const Navbar = () => {
             <X size={24} />
           </button>
           <button onClick={() => scrollTo('about')}>About</button>
+          <button onClick={() => scrollTo('skills')}>Skill</button>
+          <button onClick={() => scrollTo('experience')}>Experience</button>
           <button onClick={() => scrollTo('work')}>Work</button>
           <button onClick={() => scrollTo('testimonials')}>Testimonials</button>
           <button onClick={() => scrollTo('contact')}>Contact</button>

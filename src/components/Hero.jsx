@@ -1,4 +1,4 @@
-import { Code2, Link2, Mail, MapPin } from 'lucide-react';
+import { Code2, Link2, Mail, MapPin, PhoneCall } from 'lucide-react';
 import './Hero.css';
 
 const Hero = () => {
@@ -45,6 +45,10 @@ const Hero = () => {
                 <span className="availability-dot" />
               </div>
               <p>Actively exploring new opportunities...</p>
+            </div>
+            <div className="hero-info-row">
+              <PhoneCall size={24} className="hero-info-icon" />
+              <a href='tel:+919870778070'>+91 9870778070</a>
             </div>
           </div>
 
