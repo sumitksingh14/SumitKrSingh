@@ -44,7 +44,7 @@ const Skills = () => {
         <div className="section-header-center">
           <span className="section-label">Skills</span>
           <p className="section-subtitle center-text">
-            The skills, tools and technologies I am really good at:
+            The skills, tools, and technologies I am proficient in:
           </p>
         </div>
 
