@@ -2,9 +2,9 @@ import './Experience.css';
 
 const experiences = [
   {
-    company: 'Xoriant Corporation Pvt. Ltd.',
+    company: 'Xoriant Corporation Pvt. Ltd',
     logo: '/xoriant_logo.jpg',
-    title: 'Technical Manager',
+    title: 'Technical Manager -Xoriant Corporation Pvt. Ltd',
     period: 'Jun 2024 – Present',
     points: [
       'Program Manager / Technical Project Manager with a track record of delivering large‑scale, complex digital initiatives for global service providers through governance frameworks, agile execution, and cross‑functional leadership.',
@@ -18,9 +18,9 @@ const experiences = [
     ],
   },
   {
-    company: 'Capgemini Technology Services India Ltd.',
+    company: 'Capgemini Technology Services India Ltd',
     logo: '/capgemini_logo.jpg',
-    title: 'Senior Manager',
+    title: 'Senior Manager - Capgemini Technology Services India Ltd',
     period: 'Oct 2013 – Jun 2024',
     points: [
       'Program Manager / Technical Project Manager leading the technical and managerial delivery of mobile application projects, ensuring successful outcomes and high client satisfaction.',
@@ -33,9 +33,9 @@ const experiences = [
     ],
   },
   {
-    company: 'IGATE Global Solutions',
+    company: 'IGATE Global Solutions.',
     logo: '/igate_logo.jpg',
-    title: 'Senior Software Engineer',
+    title: 'Senior Software Engineer - IGATE Global Solutions',
     period: 'Jan 2011 – Sep 2013',
     points: [
       'Developed and delivered high-quality mobile applications for Banking and Insurance clients.',
@@ -46,9 +46,9 @@ const experiences = [
     ],
   },
   {
-    company: 'Mobicule Technology Pvt. Ltd.',
+    company: 'Mobicule Technology Pvt. Ltd',
     logo: '/mobicule_logo.jpg',
-    title: 'Programmer Analyst',
+    title: 'Programmer Analyst - Mobicule Technology Pvt. Ltd',
     period: 'Jun 2010 – Jan 2011',
     points: [
       'Developed and deployed mobile applications for clients with focus on usability and business value.',
