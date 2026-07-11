@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="app">
       <Navbar />
-      <main>
+      <main id="pdf-content">
         <Hero />
         <About />
         <Skills />
