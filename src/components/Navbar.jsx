@@ -60,7 +60,7 @@ const Navbar = () => {
             disabled={isExporting}
             aria-busy={isExporting}
           >
-            {isExporting ? 'Exporting…' : 'Export PDF'}
+            {isExporting ? 'Exporting…' : 'Export Profile PDF'}
           </button>
           <a href="/resume.pdf" download className="btn btn-primary download-cv-btn">
             <Download size={16} />
