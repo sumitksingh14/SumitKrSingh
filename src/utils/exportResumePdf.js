@@ -1,4 +1,4 @@
-export async function exportPortfolioResumePdf({ selector = '#pdf-content', filename = 'Portfolio-Resume.pdf' } = {}) {
+export async function exportPortfolioResumePdf({ selector = '#pdf-content', filename = 'SumitKumarSingh-Resume.pdf' } = {}) {
   const { jsPDF } = await import('jspdf');
 
   const container = document.querySelector(selector);
