@@ -6,6 +6,7 @@ import Experience from './presentation/views/components/Experience';
 import Portfolio from './presentation/views/components/Portfolio';
 import Testimonials from './presentation/views/components/Testimonials';
 import Contact from './presentation/views/components/Contact';
+import ThoughtOfTheDay from './presentation/views/components/ThoughtOfTheDay';
 import Footer from './presentation/views/components/Footer';
 import './App.css';
 
@@ -21,6 +22,7 @@ function App() {
         <Portfolio />
         <Testimonials />
         <Contact />
+        <ThoughtOfTheDay />
       </main>
       <Footer />
     </div>
@@ -28,3 +30,4 @@ function App() {
 }
 
 export default App;
+

@@ -1,0 +1,276 @@
+/* ─── Thought of the Day Section ─── */
+.thoughts-section {
+  background: var(--bg-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.thoughts-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border) 20%,
+    var(--border) 80%,
+    transparent
+  );
+}
+
+.thoughts-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+/* ─── Carousel Container ─── */
+.thoughts-carousel {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: 280px;
+}
+
+.thought-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.thought-slide.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* ─── Quote Card ─── */
+.thought-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  transition: all var(--transition);
+}
+
+.thought-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .thought-card:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.thought-quote-mark {
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.12;
+  font-family: Georgia, 'Times New Roman', serif;
+  position: absolute;
+  top: 0.75rem;
+  left: 1.5rem;
+  user-select: none;
+}
+
+.thought-quote-text {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.8;
+  letter-spacing: -0.01em;
+  font-style: italic;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Author ─── */
+.thought-author-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.thought-author-divider {
+  width: 48px;
+  height: 2px;
+  background: var(--accent);
+  opacity: 0.2;
+  border-radius: 1px;
+  margin-bottom: 0.75rem;
+}
+
+.thought-author-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.thought-author-role {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* ─── Featured Badge ─── */
+.thought-featured-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: var(--green-light);
+  color: var(--green);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 2rem;
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.thought-featured-badge svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ─── Navigation ─── */
+.thoughts-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.thoughts-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.thoughts-nav-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--bg-card-hover);
+}
+
+/* ─── Dots ─── */
+.thoughts-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.thoughts-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--border);
+  cursor: pointer;
+  transition: all var(--transition);
+  padding: 0;
+}
+
+.thoughts-dot.active {
+  background: var(--accent);
+  width: 24px;
+  border-radius: 4px;
+}
+
+.thoughts-dot:hover:not(.active) {
+  background: var(--text-muted);
+}
+
+/* ─── Loading Skeleton ─── */
+.thought-skeleton {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.thought-skeleton-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.skeleton-line {
+  height: 1rem;
+  background: var(--bg-secondary);
+  border-radius: 0.5rem;
+  animation: skeletonPulse 1.5s ease-in-out infinite;
+}
+
+.skeleton-line.w-full { width: 100%; }
+.skeleton-line.w-3-4 { width: 75%; }
+.skeleton-line.w-1-2 { width: 50%; }
+.skeleton-line.w-1-4 { width: 25%; }
+
+@keyframes skeletonPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+/* ─── Responsive ─── */
+@media (min-width: 768px) {
+  .thought-card {
+    padding: 3rem 3.5rem;
+  }
+
+  .thought-quote-text {
+    font-size: 1.375rem;
+  }
+
+  .thoughts-carousel {
+    min-height: 260px;
+  }
+}
+
+@media (max-width: 480px) {
+  .thought-quote-text {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+
+  .thought-card {
+    padding: 2rem 1.25rem;
+  }
+
+  .thoughts-carousel {
+    min-height: 320px;
+  }
+}
