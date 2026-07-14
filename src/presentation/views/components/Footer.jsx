@@ -1,4 +1,5 @@
 import { Copyright } from 'lucide-react';
+import LiveDateTime from './LiveDateTime';
 import './Footer.css';
 
 const Footer = () => {
@@ -9,6 +10,7 @@ const Footer = () => {
           <Copyright size={16} className="footer-icon" />
           {new Date().getFullYear()} | Designed and coded with ❤️ by Sumit Kumar Singh
         </p>
+        <LiveDateTime />
       </div>
     </footer>
   );

@@ -1,0 +1,46 @@
+/* ─── Live Date/Time Widget ─── */
+.live-datetime {
+  display: none;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-family: var(--font-primary);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  user-select: none;
+  padding: 0.25rem 0.625rem;
+  border-radius: 2rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  transition: all var(--transition);
+}
+
+.live-datetime:hover {
+  color: var(--text-secondary);
+  border-color: var(--border-hover);
+}
+
+.live-datetime-icon {
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.live-datetime-separator {
+  opacity: 0.3;
+  font-size: 0.5rem;
+}
+
+.live-datetime-time {
+  font-variant-numeric: tabular-nums;
+  min-width: 5.5em;
+  text-align: center;
+}
+
+/* Show on desktop only */
+@media (min-width: 768px) {
+  .live-datetime {
+    display: inline-flex;
+  }
+}
