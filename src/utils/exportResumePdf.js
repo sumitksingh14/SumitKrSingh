@@ -6,221 +6,335 @@ export async function exportPortfolioResumePdf({ selector = '#pdf-content', file
     throw new Error(`Could not find element with selector: ${selector}`);
   }
 
+  // Decode HTML entities and strip emojis from scraped text
+  const decodeEntities = (str) => {
+    const txt = document.createElement('textarea');
+    txt.innerHTML = str;
+    return txt.value;
+  };
+
+  const stripEmoji = (str) =>
+    str.replace(/[\u{1F300}-\u{1FFFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{FE00}-\u{FEFF}]/gu, '').trim();
+
+  const cleanText = (str) => decodeEntities(stripEmoji(str));
+
   const getText = (query, fallback = '') => {
     const el = container.querySelector(query);
-    return el?.textContent?.trim() || fallback;
+    return cleanText(el?.textContent?.trim() || fallback);
   };
 
   const getMultiText = (query) =>
-    Array.from(container.querySelectorAll(query)).map((el) => el.textContent.trim()).filter(Boolean);
+    Array.from(container.querySelectorAll(query))
+      .map((el) => cleanText(el.textContent.trim()))
+      .filter(Boolean);
 
-  const nameText = getText('.hero-heading', 'Sumit Kumar Singh').replace(/^Hi,?\s*I'm\s*/i, '');
+  // --- Scrape content ---
+  const rawName = getText('.hero-heading', "Hi, I'm Sumit Kumar Singh");
+  // Remove greeting prefix and any trailing emoji
+  const nameText = rawName.replace(/^Hi,?\s*I[''\u2019]?m\s+/i, '').replace(/\s*👋\s*/g, '').trim() || 'Sumit Kumar Singh';
+
   const headline = getText('.hero-subheading', 'Technical Program Manager | Mobile Delivery Leader');
   const summaryParagraphs = getMultiText('.about-content .about-text').slice(0, 3);
   const quickFacts = getMultiText('.about-quick-facts .about-list li');
   const skills = getMultiText('.skills-grid .skill-label');
   const location = getText('.hero-info-row p', 'Pune, India');
 
-  const contactEmail = getText('#contact .contact-row:nth-of-type(1) .contact-value', getText('.hero-socials a[href^="mailto:"]', 'sumit.kr.singh14@gmail.com'));
-  const contactPhone = getText('#contact .contact-row:nth-of-type(2) .contact-value', getText('.hero-info-row a[href^="tel:"]', '+91 98707 78070'));
-  const linkedin = Array.from(container.querySelectorAll('.contact-social-icons a[href*="linkedin"]')).map((a) => a.href)[0] || 'https://linkedin.com/in/sumitsingh14';
-  const github = Array.from(container.querySelectorAll('.contact-social-icons a[href*="github"]')).map((a) => a.href)[0] || 'https://github.com/sumitksingh14';
+  const contactEmail = 'sumit.kr.singh14@gmail.com';
+  const contactPhone = '+91 98707 78070';
+  const linkedin = 'https://linkedin.com/in/sumitsingh14';
+  const github = 'https://github.com/sumitksingh14';
 
   const experiences = Array.from(container.querySelectorAll('.experience-card')).map((card) => {
-    const rawTitle = card.querySelector('.exp-title')?.textContent.trim() || '';
-    const period = card.querySelector('.exp-period')?.textContent.trim() || '';
-    const points = Array.from(card.querySelectorAll('.exp-points li')).map((li) => li.textContent.trim()).filter(Boolean);
-    const [position, company] = rawTitle.split(' - ').map((text) => text.trim());
-    return { position: position || rawTitle, company: company || '', period, points };
+    const rawTitle = cleanText(card.querySelector('.exp-title')?.textContent.trim() || '');
+    const period = cleanText(card.querySelector('.exp-period')?.textContent.trim() || '');
+    const points = Array.from(card.querySelectorAll('.exp-points li'))
+      .map((li) => cleanText(li.textContent.trim()))
+      .filter(Boolean);
+    const dashIdx = rawTitle.indexOf(' - ');
+    const position = dashIdx !== -1 ? rawTitle.slice(0, dashIdx).trim() : rawTitle;
+    const company = dashIdx !== -1 ? rawTitle.slice(dashIdx + 3).trim() : '';
+    return { position, company, period, points };
   });
 
-  const projects = Array.from(container.querySelectorAll('.project-card')).map((card) => {
-    const projectTitle = card.querySelector('.project-title')?.textContent.trim() || '';
-    const projectDesc = card.querySelector('.project-desc')?.textContent.trim() || '';
-    return { title: projectTitle, description: projectDesc };
-  }).slice(0, 4);
+  const projects = Array.from(container.querySelectorAll('.project-card'))
+    .map((card) => ({
+      title: cleanText(card.querySelector('.project-title')?.textContent.trim() || ''),
+      description: cleanText(card.querySelector('.project-desc')?.textContent.trim() || ''),
+      tags: Array.from(card.querySelectorAll('.tag')).map((t) => cleanText(t.textContent.trim())).filter(Boolean),
+    }))
+    .slice(0, 4);
 
+  // --- PDF Setup ---
   const doc = new jsPDF({ unit: 'pt', format: 'a4', orientation: 'portrait' });
-  const margin = 40;
+  const margin = 45;
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
   const contentWidth = pageWidth - margin * 2;
-  let cursorY = 50;
+  let cursorY = 52;
 
-  const addLine = (y) => {
-    doc.setDrawColor(200);
+  const COLORS = {
+    name: [15, 23, 42],         // slate-900
+    accent: [37, 99, 235],      // blue-600
+    sectionTitle: [30, 64, 175], // blue-800
+    divider: [148, 163, 184],   // slate-400
+    body: [30, 41, 59],         // slate-800
+    meta: [71, 85, 105],        // slate-600
+    tagBg: [241, 245, 249],     // slate-100
+  };
+
+  const checkPageBreak = (reserve = 60) => {
+    if (cursorY > pageHeight - reserve) {
+      doc.addPage();
+      cursorY = 50;
+    }
+  };
+
+  const addDivider = (y, color = COLORS.divider) => {
+    doc.setDrawColor(...color);
     doc.setLineWidth(0.5);
     doc.line(margin, y, pageWidth - margin, y);
   };
 
   const addSectionHeader = (title) => {
-    if (cursorY > pageHeight - 80) {
-      doc.addPage();
-      cursorY = 50;
-    }
+    checkPageBreak(80);
+    cursorY += 6;
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(14);
+    doc.setFontSize(11);
+    doc.setTextColor(...COLORS.sectionTitle);
     doc.text(title.toUpperCase(), margin, cursorY);
-    cursorY += 8;
-    addLine(cursorY);
-    cursorY += 18;
+    cursorY += 6;
+    addDivider(cursorY, COLORS.sectionTitle);
+    cursorY += 14;
+    doc.setTextColor(...COLORS.body);
   };
 
   const addTextBlock = (text, options = {}) => {
-    const { fontSize = 11, fontStyle = 'normal', indent = 0, leading = 16 } = options;
+    const { fontSize = 10.5, fontStyle = 'normal', indent = 0, leading = 15, color = COLORS.body } = options;
     doc.setFont('helvetica', fontStyle);
     doc.setFontSize(fontSize);
+    doc.setTextColor(...color);
     const lines = doc.splitTextToSize(text, contentWidth - indent);
     lines.forEach((line) => {
-      if (cursorY > pageHeight - 60) {
-        doc.addPage();
-        cursorY = 50;
-      }
+      checkPageBreak(55);
       doc.text(line, margin + indent, cursorY);
       cursorY += leading;
     });
+    doc.setTextColor(...COLORS.body);
   };
 
-  const addLinkText = (text, url, options = {}) => {
-    const { fontSize = 11, fontStyle = 'normal', color = '#1a73e8' } = options;
-    doc.setFont('helvetica', fontStyle);
+  const addBulletedList = (items, fontSize = 10, leading = 13) => {
+    doc.setFont('helvetica', 'normal');
     doc.setFontSize(fontSize);
-    if (cursorY > pageHeight - 60) {
-      doc.addPage();
-      cursorY = 50;
-    }
-    const textWidth = doc.getTextWidth(text);
-    doc.setTextColor(color);
-    doc.textWithLink(text, margin, cursorY, { url });
-    doc.setTextColor(0, 0, 0);
-    cursorY += fontSize + 4;
-    return textWidth;
-  };
-
-  const addBulletedList = (items) => {
+    doc.setTextColor(...COLORS.body);
     items.forEach((item) => {
       if (!item) return;
-      if (cursorY > pageHeight - 60) {
-        doc.addPage();
-        cursorY = 50;
+      checkPageBreak(55);
+      const wrapped = doc.splitTextToSize(item, contentWidth - 18);
+      doc.text('\u2022', margin + 2, cursorY);
+      doc.text(wrapped[0], margin + 14, cursorY);
+      cursorY += leading;
+      for (let i = 1; i < wrapped.length; i++) {
+        checkPageBreak(55);
+        doc.text(wrapped[i], margin + 14, cursorY);
+        cursorY += leading;
       }
-      const wrapped = doc.splitTextToSize(item, contentWidth - 20);
-      doc.text(`• ${wrapped[0]}`, margin, cursorY);
-      cursorY += 14;
-      for (let i = 1; i < wrapped.length; i += 1) {
-        if (cursorY > pageHeight - 60) {
-          doc.addPage();
-          cursorY = 50;
-        }
-        doc.text(wrapped[i], margin + 12, cursorY);
-        cursorY += 14;
-      }
-      cursorY += 6;
+      cursorY += 3;
     });
   };
 
-  const addTwoColumnText = (left, right) => {
-    const halfWidth = (contentWidth - 20) / 2;
-    const leftLines = doc.splitTextToSize(left, halfWidth);
-    const rightLines = doc.splitTextToSize(right, halfWidth);
-    const maxLines = Math.max(leftLines.length, rightLines.length);
-
-    for (let i = 0; i < maxLines; i += 1) {
-      if (cursorY > pageHeight - 60) {
-        doc.addPage();
-        cursorY = 50;
-      }
-      if (leftLines[i]) {
-        doc.text(leftLines[i], margin, cursorY);
-      }
-      if (rightLines[i]) {
-        doc.text(rightLines[i], margin + halfWidth + 20, cursorY);
-      }
-      cursorY += 14;
-    }
-    cursorY += 8;
+  const addKeyValueRow = (key, value, options = {}) => {
+    const { fontSize = 10 } = options;
+    checkPageBreak(55);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(fontSize);
+    doc.setTextColor(...COLORS.meta);
+    doc.text(`${key}:`, margin, cursorY);
+    const keyWidth = doc.getTextWidth(`${key}: `);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(...COLORS.body);
+    doc.text(value, margin + keyWidth, cursorY);
+    cursorY += fontSize + 5;
   };
 
+  const addLinkRow = (key, url, options = {}) => {
+    const { fontSize = 10 } = options;
+    checkPageBreak(55);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(fontSize);
+    doc.setTextColor(...COLORS.meta);
+    doc.text(`${key}:`, margin, cursorY);
+    const keyWidth = doc.getTextWidth(`${key}: `);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(fontSize);
+    doc.setTextColor(...COLORS.accent);
+    doc.textWithLink(url, margin + keyWidth, cursorY, { url });
+    doc.setTextColor(...COLORS.body);
+    cursorY += fontSize + 5;
+  };
+
+  // ============================================================
+  // HEADER — Name, Headline, Contact Strip
+  // ============================================================
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(26);
+  doc.setTextColor(...COLORS.name);
   doc.text(nameText, margin, cursorY);
-  cursorY += 32;
+  cursorY += 30;
 
+  // Headline (may wrap)
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(11);
-  const contactLine = `${contactEmail} | ${contactPhone} | ${location}`;
-  const profileLine = `${github} | ${linkedin}`;
-  addTextBlock(headline, { fontSize: 12, leading: 16 });
-  addTextBlock(contactLine, { fontSize: 10, leading: 14 });
-  addTextBlock(profileLine, { fontSize: 10, leading: 14 });
-  cursorY += 6;
-  addLine(cursorY);
-  cursorY += 22;
+  doc.setTextColor(...COLORS.meta);
+  const headlineLines = doc.splitTextToSize(headline, contentWidth);
+  headlineLines.forEach((line) => {
+    doc.text(line, margin, cursorY);
+    cursorY += 15;
+  });
+  cursorY += 4;
 
+  // Contact strip
+  doc.setFontSize(9.5);
+  doc.setTextColor(...COLORS.meta);
+  const strip1 = `${contactEmail}  |  ${contactPhone}  |  ${location}`;
+  doc.text(strip1, margin, cursorY);
+  cursorY += 13;
+
+  // URLs as clickable links inline
+  const githubLabel = 'github.com/sumitksingh14';
+  const linkedinLabel = 'linkedin.com/in/sumitsingh14';
+  doc.setTextColor(...COLORS.accent);
+  doc.textWithLink(githubLabel, margin, cursorY, { url: github });
+  const ghWidth = doc.getTextWidth(githubLabel);
+  doc.setTextColor(...COLORS.meta);
+  doc.text('  |  ', margin + ghWidth, cursorY);
+  const separatorWidth = doc.getTextWidth('  |  ');
+  doc.setTextColor(...COLORS.accent);
+  doc.textWithLink(linkedinLabel, margin + ghWidth + separatorWidth, cursorY, { url: linkedin });
+  doc.setTextColor(...COLORS.body);
+  cursorY += 16;
+
+  addDivider(cursorY);
+  cursorY += 18;
+
+  // ============================================================
+  // PROFESSIONAL SUMMARY
+  // ============================================================
   if (summaryParagraphs.length) {
     addSectionHeader('Professional Summary');
-    summaryParagraphs.forEach((paragraph) => {
-      addTextBlock(paragraph, { fontSize: 11, leading: 16 });
+    summaryParagraphs.forEach((paragraph, i) => {
+      addTextBlock(paragraph, { fontSize: 10.5, leading: 15 });
+      if (i < summaryParagraphs.length - 1) cursorY += 4;
     });
+    cursorY += 4;
   }
 
+  // ============================================================
+  // CORE SKILLS
+  // ============================================================
   if (skills.length) {
     addSectionHeader('Core Skills');
-    addTwoColumnText(skills.slice(0, Math.ceil(skills.length / 2)).join(' • '), skills.slice(Math.ceil(skills.length / 2)).join(' • '));
+    const skillsPerRow = 4;
+    const colWidth = contentWidth / skillsPerRow;
+    const rows = [];
+    for (let i = 0; i < skills.length; i += skillsPerRow) {
+      rows.push(skills.slice(i, i + skillsPerRow));
+    }
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(...COLORS.body);
+    rows.forEach((row) => {
+      checkPageBreak(55);
+      row.forEach((skill, ci) => {
+        doc.text(`\u2022 ${skill}`, margin + ci * colWidth, cursorY);
+      });
+      cursorY += 15;
+    });
+    cursorY += 4;
   }
 
+  // ============================================================
+  // PROFESSIONAL EXPERIENCE
+  // ============================================================
   if (experiences.length) {
     addSectionHeader('Professional Experience');
-    experiences.forEach((experience) => {
-      if (cursorY > pageHeight - 120) {
-        doc.addPage();
-        cursorY = 50;
-      }
+    experiences.forEach((exp) => {
+      checkPageBreak(100);
+
+      // Role title
+      const roleTitle = exp.company ? `${exp.position} — ${exp.company}` : exp.position;
+      const roleTitleLines = doc.splitTextToSize(roleTitle, contentWidth - 90);
+
       doc.setFont('helvetica', 'bold');
-      doc.setFontSize(12);
-      doc.text(`${experience.position}${experience.company ? ` — ${experience.company}` : ''}`, margin, cursorY);
-      doc.setFont('helvetica', 'italic');
-      doc.setFontSize(10);
-      if (experience.period) {
-        doc.text(experience.period, pageWidth - margin, cursorY, { align: 'right' });
-      }
-      cursorY += 18;
-      doc.setFont('helvetica', 'normal');
       doc.setFontSize(11);
-      addBulletedList(experience.points);
+      doc.setTextColor(...COLORS.name);
+      roleTitleLines.forEach((line, li) => {
+        if (li === 0 && exp.period) {
+          doc.text(line, margin, cursorY);
+          doc.setFont('helvetica', 'italic');
+          doc.setFontSize(9.5);
+          doc.setTextColor(...COLORS.meta);
+          doc.text(exp.period, pageWidth - margin, cursorY, { align: 'right' });
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(11);
+          doc.setTextColor(...COLORS.name);
+        } else {
+          doc.text(line, margin, cursorY);
+        }
+        cursorY += 15;
+      });
+
+      doc.setTextColor(...COLORS.body);
+      cursorY += 2;
+      addBulletedList(exp.points);
+      cursorY += 6;
     });
   }
 
+  // ============================================================
+  // SELECTED PROJECTS
+  // ============================================================
   if (projects.length) {
     addSectionHeader('Selected Projects');
     projects.forEach((project) => {
-      if (cursorY > pageHeight - 120) {
-        doc.addPage();
-        cursorY = 50;
-      }
+      checkPageBreak(80);
       doc.setFont('helvetica', 'bold');
-      doc.setFontSize(11);
+      doc.setFontSize(10.5);
+      doc.setTextColor(...COLORS.name);
       doc.text(project.title, margin, cursorY);
-      cursorY += 16;
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(10);
+      cursorY += 14;
+
+      doc.setTextColor(...COLORS.body);
       addTextBlock(project.description, { fontSize: 10, leading: 14 });
-      cursorY += 10;
+
+      if (project.tags.length) {
+        doc.setFont('helvetica', 'italic');
+        doc.setFontSize(9);
+        doc.setTextColor(...COLORS.meta);
+        doc.text(project.tags.join(' · '), margin, cursorY);
+        cursorY += 12;
+      }
+      cursorY += 6;
     });
   }
 
+  // ============================================================
+  // EDUCATION / QUALIFICATIONS
+  // ============================================================
   if (quickFacts.length) {
-    addSectionHeader('Additional Qualifications');
+    addSectionHeader('Education & Qualifications');
     addBulletedList(quickFacts);
+    cursorY += 4;
   }
 
+  // ============================================================
+  // CONTACT
+  // ============================================================
   addSectionHeader('Contact');
-  addTextBlock(`Email: ${contactEmail}`, { fontSize: 11, leading: 16 });
-  addTextBlock(`Phone: ${contactPhone}`, { fontSize: 11, leading: 16 });
-  addTextBlock('LinkedIn:', { fontSize: 11, leading: 16 });
-  addLinkText(linkedin, linkedin, { fontSize: 11, fontStyle: 'normal', color: '#0b66c3' });
-  addTextBlock('GitHub:', { fontSize: 11, leading: 16 });
-  addLinkText(github, github, { fontSize: 11, fontStyle: 'normal', color: '#0b66c3' });
+  addKeyValueRow('Email', contactEmail);
+  addKeyValueRow('Phone', contactPhone);
+  addKeyValueRow('Location', location);
+  addLinkRow('LinkedIn', linkedinLabel, {});
+  addLinkRow('GitHub', githubLabel, {});
 
   doc.save(filename);
 }

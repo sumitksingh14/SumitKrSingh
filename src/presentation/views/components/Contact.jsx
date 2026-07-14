@@ -1,25 +1,9 @@
 import { Mail, Phone, Copy, Check, Code2, Link2 } from 'lucide-react';
-import { useState } from 'react';
+import { useContactViewModel } from '../../viewmodels/useContactViewModel';
 import './Contact.css';
 
 const Contact = () => {
-  const [emailCopied, setEmailCopied] = useState(false);
-  const [phoneCopied, setPhoneCopied] = useState(false);
-
-  const copyToClipboard = async (text, setter) => {
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch {
-      const el = document.createElement('textarea');
-      el.value = text;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
-    }
-    setter(true);
-    setTimeout(() => setter(false), 2000);
-  };
+  const { emailCopied, phoneCopied, copyEmail, copyPhone } = useContactViewModel();
 
   return (
     <section id="contact" className="section contact-section">
@@ -39,7 +23,7 @@ const Contact = () => {
             <h2 className="contact-value">sumit.kr.singh14@gmail.com</h2>
             <button
               className="icon-btn copy-btn"
-              onClick={() => copyToClipboard('sumit.kr.singh14@gmail.com', setEmailCopied)}
+              onClick={copyEmail}
               aria-label="Copy email"
             >
               {emailCopied ? <Check size={24} /> : <Copy size={24} />}
@@ -52,7 +36,7 @@ const Contact = () => {
             <h2 className="contact-value">+91 98707 78070</h2>
             <button
               className="icon-btn copy-btn"
-              onClick={() => copyToClipboard('+919870778070', setPhoneCopied)}
+              onClick={copyPhone}
               aria-label="Copy phone"
             >
               {phoneCopied ? <Check size={24} /> : <Copy size={24} />}

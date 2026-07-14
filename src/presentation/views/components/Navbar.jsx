@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Download, Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
-import { exportPortfolioResumePdf } from '../utils/exportResumePdf';
+import { exportPortfolioResumePdf } from '../../../utils/exportResumePdf';
 import './Navbar.css';
 
 const Navbar = () => {

@@ -1,12 +1,12 @@
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Services';
-import Experience from './components/Experience';
-import Portfolio from './components/Portfolio';
-import Testimonials from './components/Testimonials';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import Navbar from './presentation/views/components/Navbar';
+import Hero from './presentation/views/components/Hero';
+import About from './presentation/views/components/About';
+import Skills from './presentation/views/components/Services';
+import Experience from './presentation/views/components/Experience';
+import Portfolio from './presentation/views/components/Portfolio';
+import Testimonials from './presentation/views/components/Testimonials';
+import Contact from './presentation/views/components/Contact';
+import Footer from './presentation/views/components/Footer';
 import './App.css';
 
 function App() {
