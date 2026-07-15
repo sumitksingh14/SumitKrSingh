@@ -17,49 +17,129 @@ const AmbientMusic = () => {
   const scrollTimeoutRef = useRef(null);
   const fadeIntervalRef = useRef(null);
 
-  // Chord frequencies for a soft ambient pad (C major 7th voicing)
-  const chordFrequencies = [130.81, 164.81, 196.00, 246.94, 329.63];
+  // Dreamy piano chord — C major 9th spread voicing
+  const chordFrequencies = [
+    130.81,  // C3
+    164.81,  // E3
+    196.00,  // G3
+    246.94,  // B3
+    293.66,  // D4
+    329.63,  // E4
+  ];
+
+  const loopTimerRef = useRef(null);
 
   const createAmbientSound = useCallback(() => {
-    if (audioCtxRef.current) return;
+    if (!audioCtxRef.current) {
+      audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)();
+      gainNodeRef.current = audioCtxRef.current.createGain();
+      gainNodeRef.current.gain.value = 0;
+      gainNodeRef.current.connect(audioCtxRef.current.destination);
+    }
 
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    audioCtxRef.current = ctx;
+    const audioCtx = audioCtxRef.current;
 
-    // Master gain — starts silent
-    const masterGain = ctx.createGain();
-    masterGain.gain.value = 0;
-    masterGain.connect(ctx.destination);
-    gainNodeRef.current = masterGain;
+    // --- Realistic Piano Tone Generator ---
+    // Uses additive synthesis with inharmonic partials, per-harmonic
+    // decay envelopes, and a short noise burst for hammer attack.
+    function createPianoNote(freq, startTime, destination, velocity = 0.35) {
+      const noteGain = audioCtx.createGain();
+      noteGain.gain.setValueAtTime(0, startTime);
+      noteGain.connect(destination);
 
-    // Create soft oscillators for each note in the chord
-    const oscs = chordFrequencies.map((freq, i) => {
-      const osc = ctx.createOscillator();
-      osc.type = 'sine';
-      osc.frequency.value = freq;
+      // Number of harmonic partials to synthesize
+      const numPartials = 8;
+      // Piano inharmonicity coefficient (strings are slightly stiff)
+      const B = 0.0004;
+      // Amplitude rolloff per harmonic — higher partials are quieter
+      const amplitudes = [1, 0.6, 0.4, 0.25, 0.15, 0.09, 0.05, 0.03];
+      // Higher harmonics decay faster (simulates energy loss in real strings)
+      const decayBase = 4.5; // seconds for the fundamental
 
-      // Slight detune for warmth
-      osc.detune.value = (i - 2) * 3;
+      for (let n = 1; n <= numPartials; n++) {
+        const osc = audioCtx.createOscillator();
+        const partialGain = audioCtx.createGain();
 
-      // Individual gain for mixing
-      const oscGain = ctx.createGain();
-      oscGain.gain.value = 0.06 - i * 0.008; // Lower notes louder
+        osc.type = 'sine';
 
-      // Low-pass filter for softness
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.value = 400 + i * 50;
-      filter.Q.value = 0.5;
+        // Piano strings are slightly inharmonic: f_n = n * f0 * sqrt(1 + B * n^2)
+        const partialFreq = n * freq * Math.sqrt(1 + B * n * n);
+        osc.frequency.setValueAtTime(partialFreq, startTime);
 
-      osc.connect(filter);
-      filter.connect(oscGain);
-      oscGain.connect(masterGain);
-      osc.start();
+        // Slight random detuning for warmth (+/- 0.5 cents)
+        const detuneCents = (Math.random() - 0.5) * 1.0;
+        osc.detune.setValueAtTime(detuneCents, startTime);
 
-      return osc;
-    });
+        const amp = (amplitudes[n - 1] || 0.02) * velocity;
+        const decay = decayBase / (1 + (n - 1) * 0.35); // faster decay for upper partials
 
-    oscillatorsRef.current = oscs;
+        // Per-partial envelope
+        partialGain.gain.setValueAtTime(0, startTime);
+        partialGain.gain.linearRampToValueAtTime(amp, startTime + 0.005); // ~5ms attack
+        partialGain.gain.setTargetAtTime(amp * 0.6, startTime + 0.005, 0.08); // quick drop to sustain
+        partialGain.gain.setTargetAtTime(0.0001, startTime + 0.1, decay * 0.4); // long exponential release
+
+        osc.connect(partialGain);
+        partialGain.connect(noteGain);
+
+        osc.start(startTime);
+        osc.stop(startTime + decay + 1);
+
+        oscillatorsRef.current.push(osc);
+      }
+
+      // --- Hammer noise burst ---
+      // Short burst of filtered noise simulates the mechanical strike
+      const bufferLen = audioCtx.sampleRate * 0.06; // 60ms
+      const noiseBuffer = audioCtx.createBuffer(1, bufferLen, audioCtx.sampleRate);
+      const data = noiseBuffer.getChannelData(0);
+      for (let i = 0; i < bufferLen; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferLen * 0.15));
+      }
+
+      const noiseSrc = audioCtx.createBufferSource();
+      noiseSrc.buffer = noiseBuffer;
+
+      // Bandpass filter to keep the hammer click natural
+      const noiseFilter = audioCtx.createBiquadFilter();
+      noiseFilter.type = 'bandpass';
+      noiseFilter.frequency.value = Math.min(freq * 4, 6000);
+      noiseFilter.Q.value = 0.8;
+
+      const noiseGain = audioCtx.createGain();
+      noiseGain.gain.setValueAtTime(velocity * 0.12, startTime);
+      noiseGain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.05);
+
+      noiseSrc.connect(noiseFilter);
+      noiseFilter.connect(noiseGain);
+      noiseGain.connect(noteGain);
+
+      noiseSrc.start(startTime);
+
+      // Master envelope for the whole note
+      noteGain.gain.linearRampToValueAtTime(1.0, startTime + 0.005);
+    }
+
+    // Play the chord (one-shot), notes staggered for a soft arpeggiated feel
+    function playChord() {
+      const now = audioCtx.currentTime;
+      const masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0.35, now);
+      masterGain.connect(gainNodeRef.current);
+
+      chordFrequencies.forEach((freq, i) => {
+        const noteOffset = i * 0.08; // 80ms stagger between notes
+        createPianoNote(freq, now + noteOffset, masterGain, 0.3);
+      });
+    }
+
+    // Play immediately, then loop every 5s for continuous ambient feel
+    playChord();
+    loopTimerRef.current = setInterval(() => {
+      if (audioCtxRef.current && audioCtxRef.current.state === 'running') {
+        playChord();
+      }
+    }, 5000);
   }, []);
 
   const fadeIn = useCallback(() => {
@@ -148,6 +228,7 @@ const AmbientMusic = () => {
   // Cleanup on unmount
   useEffect(() => {
     return () => {
+      clearInterval(loopTimerRef.current);
       oscillatorsRef.current.forEach((osc) => {
         try { osc.stop(); } catch (e) { /* already stopped */ }
       });
