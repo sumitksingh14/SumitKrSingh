@@ -208,19 +208,34 @@ const AmbientMusic = () => {
 
   const toggleMute = () => {
     if (!hasInteracted) {
+      // First click: create the audio graph, then immediately fade in
       setHasInteracted(true);
       createAmbientSound();
+      fadeIn();
       setIsMuted(false);
       return;
     }
 
     if (isMuted) {
+      // Unmute: resume context and fade in
       if (audioCtxRef.current?.state === 'suspended') {
         audioCtxRef.current.resume();
       }
+      fadeIn();
       setIsMuted(false);
     } else {
-      fadeOut();
+      // Mute: kill any ongoing fade, slam gain to 0 immediately,
+      // and suspend the context so the chord loop pauses cleanly.
+      clearInterval(fadeIntervalRef.current);
+      clearTimeout(scrollTimeoutRef.current);
+      if (gainNodeRef.current) {
+        gainNodeRef.current.gain.cancelScheduledValues(audioCtxRef.current.currentTime);
+        gainNodeRef.current.gain.setValueAtTime(0, audioCtxRef.current.currentTime);
+      }
+      if (audioCtxRef.current?.state === 'running') {
+        audioCtxRef.current.suspend();
+      }
+      setIsPlaying(false);
       setIsMuted(true);
     }
   };
