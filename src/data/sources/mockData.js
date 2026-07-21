@@ -55,6 +55,7 @@ export const projects = [
   },
   {
     title: 'iCAT2 Timesheet & Expense App',
+    image: '/images/projects/icat2_timesheet.png',
     description:
       'Developed an iOS mobile application for a leading US-based manufacturing and finance client, enabling field engineers to efficiently log time and expenses directly into enterprise systems.',
     tags: ['iOS Development', 'Enterprise Mobility', 'Field Service'],
@@ -63,6 +64,7 @@ export const projects = [
   },
   {
     title: 'Chubb FNOL (First Notice of Loss)',
+    image: '/images/projects/chubb_fnol.png',
     description:
       'Engineered an iOS application for a US-based insurance firm, allowing users to immediately notify the insurer of losses or damage, available natively on the US App Store.',
     tags: ['iOS Development', 'Insurance Tech', 'Consumer App'],
