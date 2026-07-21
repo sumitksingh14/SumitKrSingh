@@ -16,7 +16,16 @@ export async function exportPortfolioResumePdf({ selector = '#pdf-content', file
   const stripEmoji = (str) =>
     str.replace(/[\u{1F300}-\u{1FFFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{FE00}-\u{FEFF}]/gu, '').trim();
 
-  const cleanText = (str) => decodeEntities(stripEmoji(str));
+  // jsPDF standard fonts only support WinAnsiEncoding; unsupported characters cause text truncation
+  const normalizeText = (str) => {
+    return str
+      .replace(/[\u2011\u2012\u2013\u2014\u2015]/g, '-') // normalize dashes/hyphens
+      .replace(/[\u2018\u2019]/g, "'") // single quotes
+      .replace(/[\u201C\u201D]/g, '"') // double quotes
+      .replace(/[\u2026]/g, '...'); // ellipsis
+  };
+
+  const cleanText = (str) => normalizeText(decodeEntities(stripEmoji(str)));
 
   const getText = (query, fallback = '') => {
     const el = container.querySelector(query);
@@ -70,6 +79,7 @@ export async function exportPortfolioResumePdf({ selector = '#pdf-content', file
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
   const contentWidth = pageWidth - margin * 2;
+  const BOTTOM_MARGIN = 65; // safe zone – no text below this distance from page bottom
   let cursorY = 52;
 
   const COLORS = {
@@ -82,8 +92,8 @@ export async function exportPortfolioResumePdf({ selector = '#pdf-content', file
     tagBg: [241, 245, 249],     // slate-100
   };
 
-  const checkPageBreak = (reserve = 60) => {
-    if (cursorY > pageHeight - reserve) {
+  const checkPageBreak = (reserve = BOTTOM_MARGIN) => {
+    if (cursorY > pageHeight - Math.max(reserve, BOTTOM_MARGIN)) {
       doc.addPage();
       cursorY = 50;
     }
@@ -115,30 +125,33 @@ export async function exportPortfolioResumePdf({ selector = '#pdf-content', file
     doc.setTextColor(...color);
     const lines = doc.splitTextToSize(text, contentWidth - indent);
     lines.forEach((line) => {
-      checkPageBreak(55);
+      checkPageBreak(leading + BOTTOM_MARGIN);
       doc.text(line, margin + indent, cursorY);
       cursorY += leading;
     });
     doc.setTextColor(...COLORS.body);
   };
 
-  const addBulletedList = (items, fontSize = 10, leading = 13) => {
+  const addBulletedList = (items, fontSize = 10, leading = 14) => {
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(fontSize);
     doc.setTextColor(...COLORS.body);
     items.forEach((item) => {
       if (!item) return;
-      checkPageBreak(55);
+      // Reserve enough space for at least the first line of the bullet
+      checkPageBreak(leading + BOTTOM_MARGIN);
       const wrapped = doc.splitTextToSize(item, contentWidth - 18);
       doc.text('\u2022', margin + 2, cursorY);
       doc.text(wrapped[0], margin + 14, cursorY);
       cursorY += leading;
       for (let i = 1; i < wrapped.length; i++) {
-        checkPageBreak(55);
+        checkPageBreak(leading + BOTTOM_MARGIN);
         doc.text(wrapped[i], margin + 14, cursorY);
         cursorY += leading;
       }
-      cursorY += 3;
+      // Guard the inter-bullet spacing against page overflow
+      checkPageBreak(leading);
+      cursorY += 2;
     });
   };
 
@@ -243,7 +256,7 @@ export async function exportPortfolioResumePdf({ selector = '#pdf-content', file
     doc.setFontSize(10);
     doc.setTextColor(...COLORS.body);
     rows.forEach((row) => {
-      checkPageBreak(55);
+      checkPageBreak(BOTTOM_MARGIN);
       row.forEach((skill, ci) => {
         doc.text(`\u2022 ${skill}`, margin + ci * colWidth, cursorY);
       });
@@ -258,16 +271,23 @@ export async function exportPortfolioResumePdf({ selector = '#pdf-content', file
   if (experiences.length) {
     addSectionHeader('Professional Experience');
     experiences.forEach((exp) => {
+      // Reserve space for title + at least first bullet line
       checkPageBreak(100);
+
+      // Calculate available width for the role title (leave room for period text)
+      doc.setFont('helvetica', 'italic');
+      doc.setFontSize(9.5);
+      const periodWidth = exp.period ? doc.getTextWidth(exp.period) + 16 : 0;
 
       // Role title
       const roleTitle = exp.company ? `${exp.position} — ${exp.company}` : exp.position;
-      const roleTitleLines = doc.splitTextToSize(roleTitle, contentWidth - 90);
+      const roleTitleLines = doc.splitTextToSize(roleTitle, contentWidth - periodWidth);
 
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(11);
       doc.setTextColor(...COLORS.name);
       roleTitleLines.forEach((line, li) => {
+        checkPageBreak(15 + BOTTOM_MARGIN);
         if (li === 0 && exp.period) {
           doc.text(line, margin, cursorY);
           doc.setFont('helvetica', 'italic');
@@ -286,7 +306,7 @@ export async function exportPortfolioResumePdf({ selector = '#pdf-content', file
       doc.setTextColor(...COLORS.body);
       cursorY += 2;
       addBulletedList(exp.points);
-      cursorY += 6;
+      cursorY += 4;
     });
   }
 
@@ -325,16 +345,6 @@ export async function exportPortfolioResumePdf({ selector = '#pdf-content', file
     addBulletedList(quickFacts);
     cursorY += 4;
   }
-
-  // ============================================================
-  // CONTACT
-  // ============================================================
-  addSectionHeader('Contact');
-  addKeyValueRow('Email', contactEmail);
-  addKeyValueRow('Phone', contactPhone);
-  addKeyValueRow('Location', location);
-  addLinkRow('LinkedIn', linkedinLabel, {});
-  addLinkRow('GitHub', githubLabel, {});
 
   doc.save(filename);
 }
