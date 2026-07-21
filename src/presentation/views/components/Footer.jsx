@@ -1,4 +1,5 @@
-import { Copyright, Code2, Link2, Mail } from 'lucide-react';
+import { Copyright, Code2, Mail } from 'lucide-react';
+import LinkedinIcon from './LinkedinIcon';
 import LiveDateTime from './LiveDateTime';
 import './Footer.css';
 
@@ -25,7 +26,7 @@ const Footer = () => {
               className="icon-btn"
               aria-label="LinkedIn"
             >
-              <Link2 size={18} />
+              <LinkedinIcon size={18} />
             </a>
             <a
               href="mailto:sumit.kr.singh14@gmail.com"

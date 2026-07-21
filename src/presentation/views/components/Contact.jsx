@@ -1,4 +1,5 @@
-import { Mail, Phone, Copy, Check, Code2, Link2 } from 'lucide-react';
+import { Mail, Phone, Copy, Check, Code2 } from 'lucide-react';
+import LinkedinIcon from './LinkedinIcon';
 import { useContactViewModel } from '../../viewmodels/useContactViewModel';
 import { ScrollReveal } from '../hooks/useScrollReveal';
 import './Contact.css';
@@ -68,7 +69,7 @@ const Contact = () => {
                   className="icon-btn"
                   aria-label="LinkedIn"
                 >
-                  <Link2 size={24} />
+                  <LinkedinIcon size={24} />
                 </a>
                 <a
                   href="mailto:sumit.kr.singh14@gmail.com"

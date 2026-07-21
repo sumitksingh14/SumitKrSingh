@@ -1,4 +1,5 @@
-import { Code2, Link2, Mail, MapPin, PhoneCall } from 'lucide-react';
+import { Code2, Mail, MapPin, PhoneCall } from 'lucide-react';
+import LinkedinIcon from './LinkedinIcon';
 import { useTypedText } from '../hooks/useTypedText';
 import { ScrollReveal } from '../hooks/useScrollReveal';
 import './Hero.css';
@@ -67,7 +68,7 @@ const Hero = () => {
               className="icon-btn"
               aria-label="LinkedIn"
             >
-              <Link2 size={24} />
+              <LinkedinIcon size={24} />
             </a>
             <a
               href="https://github.com/sumitksingh14"
