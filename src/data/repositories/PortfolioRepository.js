@@ -1,4 +1,4 @@
-import { projects, experiences, skills, thoughts } from '../sources/mockData';
+import { projects, experiences, skills, thoughts, testimonials, stats, certifications } from '../sources/mockData';
 
 export class PortfolioRepository {
   getProjects() {
@@ -12,6 +12,18 @@ export class PortfolioRepository {
 
   getSkills() {
     return Promise.resolve(skills);
+  }
+
+  getTestimonials() {
+    return Promise.resolve(testimonials);
+  }
+
+  getStats() {
+    return Promise.resolve(stats);
+  }
+
+  getCertifications() {
+    return Promise.resolve(certifications);
   }
 
   getThoughtOfTheDay() {

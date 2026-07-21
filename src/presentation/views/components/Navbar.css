@@ -11,6 +11,8 @@
 
 .navbar.scrolled {
   border-bottom-color: var(--border);
+  backdrop-filter: blur(8px);
+  background: color-mix(in srgb, var(--bg-primary) 85%, transparent);
 }
 
 .navbar-container {
@@ -54,12 +56,35 @@
   font-size: 1rem;
   font-weight: 500;
   color: var(--text-secondary);
-  padding: 0;
+  padding: 0.25rem 0;
   transition: color var(--transition-fast);
+  position: relative;
 }
 
 .nav-links button:hover {
   color: var(--text-primary);
+}
+
+/* Active section indicator */
+.nav-links button.active {
+  color: var(--text-primary);
+}
+
+.nav-links button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+  animation: navIndicatorIn 0.3s ease;
+}
+
+@keyframes navIndicatorIn {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
 }
 
 /* ─── Actions ─── */
@@ -177,6 +202,14 @@
     width: 100%;
     text-align: left;
     border-bottom: 1px solid var(--border);
+  }
+
+  .nav-links button.active::after {
+    display: none;
+  }
+
+  .nav-links button.active {
+    color: var(--accent);
   }
 
   .download-cv-btn {

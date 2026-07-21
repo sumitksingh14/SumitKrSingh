@@ -78,6 +78,20 @@
   color: var(--text-primary);
 }
 
+.project-role {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.1875rem 0.75rem;
+  border-radius: 2rem;
+  background: var(--green-light);
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  align-self: flex-start;
+}
+
 .project-desc {
   font-size: 1rem;
   color: var(--text-secondary);

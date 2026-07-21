@@ -5,6 +5,7 @@ export const projects = [
     description:
       'Led the end-to-end delivery of a secure enterprise mobile platform for Catalent, integrating Salesforce and Azure AD. Orchestrated architecture, managed cross-functional teams, and ensured engineering excellence via CI/CD, automated testing, and strict security compliance.',
     tags: ['Solution Architecture', 'Mobile Enterprise', 'Azure AD', 'Salesforce', 'Technical Leadership'],
+    role: 'Technical Program Manager',
     link: null,
   },
   {
@@ -13,6 +14,7 @@ export const projects = [
     description:
       'Managed technical and functional delivery of a US-based retail mobile app for Johnson Controls. Aligned business objectives with technology execution, optimizing resource utilization and managing cross-functional iOS, Android, and QA teams.',
     tags: ['Technical Project Management', 'iOS', 'Android', 'Stakeholder Management', 'QA'],
+    role: 'Technical Project Manager',
     link: null,
   },
   {
@@ -21,6 +23,7 @@ export const projects = [
     description:
       'Spearheaded the API Guardrails Program at NiCE Interactive Solutions, building the first API monetization model and automating governance. Reduced review cycles by 50% and improved developer experience through centralized documentation and analytics dashboards.',
     tags: ['API Governance', 'Monetization Strategy', 'Program Management', 'Security', 'Developer Experience'],
+    role: 'Program Manager',
     link: null,
   },
   {
@@ -29,6 +32,7 @@ export const projects = [
     description:
       'Directed delivery of a UK-based Fintech mobile platform built on React Native and Node.js. Managed client relationships, financial budgeting, and technical process improvements that optimized resources and increased overall delivery efficiency.',
     tags: ['Fintech', 'React Native', 'Node.js', 'Delivery Management', 'Process Optimization'],
+    role: 'Delivery Manager',
     link: null,
   },
   {
@@ -37,6 +41,7 @@ export const projects = [
     description:
       'Architected and led the digital mobile transformation for Citibank across iOS, Android, React Native, and AngularJS. Oversaw solution design, technical delivery, and architectural reviews while coordinating multifaceted development activities.',
     tags: ['Mobile Architecture', 'Solution Design', 'Banking & Finance', 'React Native', 'Client Management'],
+    role: 'Mobile Technical Architect',
     link: null,
   },
   {
@@ -45,6 +50,7 @@ export const projects = [
     description:
       'Directed the digital migration from a legacy Kony implementation to a modern native Swift and Kotlin architecture. Established a Mobile Center of Excellence (CoE) and managed end-to-end technical delivery and solution design.',
     tags: ['Digital Transformation', 'Native iOS & Android', 'Swift & Kotlin', 'Mobile CoE', 'Banking Apps'],
+    role: 'Technical Program Manager',
     link: null,
   },
   {
@@ -52,6 +58,7 @@ export const projects = [
     description:
       'Developed an iOS mobile application for a leading US-based manufacturing and finance client, enabling field engineers to efficiently log time and expenses directly into enterprise systems.',
     tags: ['iOS Development', 'Enterprise Mobility', 'Field Service'],
+    role: 'Senior iOS Developer',
     link: null,
   },
   {
@@ -59,6 +66,7 @@ export const projects = [
     description:
       'Engineered an iOS application for a US-based insurance firm, allowing users to immediately notify the insurer of losses or damage, available natively on the US App Store.',
     tags: ['iOS Development', 'Insurance Tech', 'Consumer App'],
+    role: 'iOS Developer',
     link: null,
   }
 ];
@@ -69,6 +77,8 @@ export const experiences = [
     logo: '/xoriant_logo.jpg',
     title: 'Technical Manager -Xoriant Corporation Pvt. Ltd',
     period: 'Jun 2024 – Present',
+    highlights: ['40+ Engineers', '3 Geographies', '2 Parallel Programs'],
+    technologies: ['React Native', 'iOS', 'Android', 'Node.js', 'Azure', 'Jira', 'Confluence'],
     points: [
       'Program Manager / Technical Project Manager with a track record of delivering large‑scale, complex digital initiatives for global service providers through governance frameworks, agile execution, and cross‑functional leadership.',
       'Directed parallel programs including a UK fintech platform and a US retail mobile app, ensuring end‑to‑end technical and functional delivery across high‑visibility engagements.',
@@ -85,6 +95,8 @@ export const experiences = [
     logo: '/capgemini_logo.jpg',
     title: 'Senior Manager - Capgemini Technology Services India Ltd',
     period: 'Oct 2013 – Jun 2024',
+    highlights: ['11 Years', '100+ Engineers Led', '15+ Projects'],
+    technologies: ['iOS', 'Android', 'React Native', 'Swift', 'Kotlin', 'AngularJS', 'Azure AD', 'CI/CD'],
     points: [
       'Program Manager / Technical Project Manager leading the technical and managerial delivery of mobile application projects, ensuring successful outcomes and high client satisfaction.',
       'Fostered collaboration and teamwork across distributed teams, cultivating a positive work environment that enhanced productivity and accelerated delivery.',
@@ -100,6 +112,8 @@ export const experiences = [
     logo: '/igate_logo.jpg',
     title: 'Senior Software Engineer - IGATE Global Solutions',
     period: 'Jan 2011 – Sep 2013',
+    highlights: ['Banking & Insurance', 'iOS Lead', 'App Store Published'],
+    technologies: ['Objective-C', 'iOS SDK', 'SQLite', 'REST APIs', 'Git'],
     points: [
       'Developed and delivered high-quality mobile applications for Banking and Insurance clients.',
       'Worked closely with cross-functional teams to translate business requirements into intuitive user experiences.',
@@ -113,6 +127,8 @@ export const experiences = [
     logo: '/mobicule_logo.jpg',
     title: 'Programmer Analyst - Mobicule Technology Pvt. Ltd',
     period: 'Jun 2010 – Jan 2011',
+    highlights: ['Career Start', 'Mobile Pioneer', 'Full-Stack Mobile'],
+    technologies: ['Objective-C', 'iOS SDK', 'Xcode', 'REST APIs'],
     points: [
       'Developed and deployed mobile applications for clients with focus on usability and business value.',
       'Collaborated with cross-functional teams to ensure smooth integration and application functionality.',
@@ -123,22 +139,89 @@ export const experiences = [
 ];
 
 export const skills = [
-  { iconStr: 'Smartphone', label: 'iOS' },
-  { iconStr: 'MonitorSmartphone', label: 'Android' },
-  { iconStr: 'Code2', label: 'React Native' },
-  { iconStr: 'FileCode2', label: 'Swift' },
-  { iconStr: 'Layers', label: 'Kotlin' },
-  { iconStr: 'Layout', label: 'Architecture' },
-  { iconStr: 'Settings2', label: 'Program Management' },
-  { iconStr: 'Kanban', label: 'Agile / Scrum' },
-  { iconStr: 'Users', label: 'Leadership' },
-  { iconStr: 'Shield', label: 'API Governance' },
-  { iconStr: 'GitBranch', label: 'CI/CD' },
-  { iconStr: 'Database', label: 'Databases' },
-  { iconStr: 'Cloud', label: 'Cloud' },
-  { iconStr: 'BarChart3', label: 'Analytics' },
-  { iconStr: 'Globe', label: 'REST APIs' },
-  { iconStr: 'MessageSquare', label: 'Stakeholder Management' },
+  {
+    category: 'Mobile Development',
+    items: [
+      { iconStr: 'Smartphone', label: 'iOS', proficiency: 95 },
+      { iconStr: 'MonitorSmartphone', label: 'Android', proficiency: 90 },
+      { iconStr: 'Code2', label: 'React Native', proficiency: 85 },
+      { iconStr: 'FileCode2', label: 'Swift', proficiency: 90 },
+      { iconStr: 'Layers', label: 'Kotlin', proficiency: 80 },
+    ],
+  },
+  {
+    category: 'Architecture & Engineering',
+    items: [
+      { iconStr: 'Layout', label: 'Architecture', proficiency: 90 },
+      { iconStr: 'GitBranch', label: 'CI/CD', proficiency: 85 },
+      { iconStr: 'Database', label: 'Databases', proficiency: 80 },
+      { iconStr: 'Cloud', label: 'Cloud', proficiency: 80 },
+      { iconStr: 'Globe', label: 'REST APIs', proficiency: 90 },
+    ],
+  },
+  {
+    category: 'Leadership & Management',
+    items: [
+      { iconStr: 'Settings2', label: 'Program Management', proficiency: 95 },
+      { iconStr: 'Kanban', label: 'Agile / Scrum', proficiency: 95 },
+      { iconStr: 'Users', label: 'Leadership', proficiency: 90 },
+      { iconStr: 'Shield', label: 'API Governance', proficiency: 85 },
+      { iconStr: 'BarChart3', label: 'Analytics', proficiency: 80 },
+      { iconStr: 'MessageSquare', label: 'Stakeholder Mgmt', proficiency: 95 },
+    ],
+  },
+];
+
+export const stats = [
+  { value: '16+', label: 'Years Experience', iconStr: 'Calendar' },
+  { value: '50+', label: 'Projects Delivered', iconStr: 'Briefcase' },
+  { value: '200+', label: 'Engineers Led', iconStr: 'Users' },
+  { value: '20+', label: 'Enterprise Clients', iconStr: 'Building2' },
+];
+
+export const testimonials = [
+  {
+    name: 'Senior Director, Engineering',
+    company: 'Global Fintech Company',
+    relationship: 'Direct Stakeholder',
+    quote:
+      'Sumit consistently delivers complex mobile programmes on time and within budget. His ability to bridge technical and business stakeholders is exceptional. He transformed our mobile delivery processes.',
+  },
+  {
+    name: 'VP of Product',
+    company: 'UK Banking Client',
+    relationship: 'Client Partner',
+    quote:
+      'Working with Sumit was a game-changer for our digital transformation. His deep understanding of mobile architecture combined with strong programme governance made him an invaluable partner.',
+  },
+  {
+    name: 'CTO',
+    company: 'Retail Technology Platform',
+    relationship: 'Executive Sponsor',
+    quote:
+      'Sumit brought structure and clarity to our multi-platform mobile programme. His leadership style inspires teams to deliver their best work while maintaining high quality standards.',
+  },
+  {
+    name: 'Engineering Lead',
+    company: 'Insurance Enterprise',
+    relationship: 'Peer Collaborator',
+    quote:
+      'One of the most organized and technically sound program managers I have worked with. Sumit has a rare ability to understand deep technical details while keeping the big picture in focus.',
+  },
+  {
+    name: 'Product Manager',
+    company: 'Global Banking Institution',
+    relationship: 'Cross-functional Partner',
+    quote:
+      'Sumit\'s approach to delivery is both rigorous and empathetic. He builds trust with every team he works with and consistently drives outcomes that exceed expectations.',
+  },
+];
+
+export const certifications = [
+  { name: 'PMP', fullName: 'Project Management Professional', issuer: 'PMI', iconStr: 'Award' },
+  { name: 'CSM', fullName: 'Certified ScrumMaster', issuer: 'Scrum Alliance', iconStr: 'Shield' },
+  { name: 'AWS CCP', fullName: 'AWS Cloud Practitioner', issuer: 'Amazon Web Services', iconStr: 'Cloud' },
+  { name: 'SAFe', fullName: 'SAFe Agilist', issuer: 'Scaled Agile', iconStr: 'Kanban' },
 ];
 
 export const thoughts = [

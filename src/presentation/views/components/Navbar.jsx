@@ -1,20 +1,55 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Download, Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import AmbientMusic from './AmbientMusic';
 import { exportPortfolioResumePdf } from '../../../utils/exportResumePdf';
 import './Navbar.css';
 
+const navItems = [
+  { id: 'about', label: 'About' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'work', label: 'Work' },
+  { id: 'testimonials', label: 'Testimonials' },
+  { id: 'contact', label: 'Contact' },
+];
+
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Active section tracking via IntersectionObserver
+  const updateActiveSection = useCallback(() => {
+    const sections = navItems.map(item => document.getElementById(item.id)).filter(Boolean);
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-20% 0px -60% 0px', threshold: 0 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const cleanup = updateActiveSection();
+    return cleanup;
+  }, [updateActiveSection]);
 
   const scrollTo = (id) => {
     setMenuOpen(false);
@@ -43,12 +78,15 @@ const Navbar = () => {
           <button className="nav-close-btn" onClick={() => setMenuOpen(false)} aria-label="Close menu">
             <X size={24} />
           </button>
-          <button onClick={() => scrollTo('about')}>About</button>
-          <button onClick={() => scrollTo('skills')}>Skill</button>
-          <button onClick={() => scrollTo('experience')}>Experience</button>
-          <button onClick={() => scrollTo('work')}>Work</button>
-          <button onClick={() => scrollTo('testimonials')}>Testimonials</button>
-          <button onClick={() => scrollTo('contact')}>Contact</button>
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              className={activeSection === item.id ? 'active' : ''}
+              onClick={() => scrollTo(item.id)}
+            >
+              {item.label}
+            </button>
+          ))}
         </div>
 
         <div className="navbar-actions">

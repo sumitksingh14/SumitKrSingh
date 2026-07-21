@@ -28,7 +28,7 @@ const LiveDateTime = () => {
   };
 
   return (
-    <div className="live-datetime" aria-live="polite" aria-label="Current date and time">
+    <div className="live-datetime" aria-label="Current date and time">
       <Clock size={12} className="live-datetime-icon" />
       <span className="live-datetime-date">{formatDate(now)}</span>
       <span className="live-datetime-separator">•</span>

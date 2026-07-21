@@ -1,7 +1,22 @@
 import { Code2, Link2, Mail, MapPin, PhoneCall } from 'lucide-react';
+import { useTypedText } from '../hooks/useTypedText';
+import { ScrollReveal } from '../hooks/useScrollReveal';
 import './Hero.css';
 
+const roles = [
+  'Technical Program Manager',
+  'Mobile Delivery Leader',
+  'Solution Architect',
+  'Engineering Leader',
+];
+
 const Hero = () => {
+  const { displayText } = useTypedText(roles, {
+    typingSpeed: 70,
+    deletingSpeed: 35,
+    pauseTime: 2200,
+  });
+
   return (
     <section id="home" className="hero section">
       <div className="container hero-container">
@@ -11,13 +26,10 @@ const Hero = () => {
             <h1 className="hero-heading">
               Hi, I'm Sumit <span className="animate-waving-hand">👋</span>
             </h1>
-            <h3 className="hero-subheading">
-              Technical Program Manager | Mobile Delivery Leader (iOS, Android,
-              React Native) | 16+ Years Orchestrating Enterprise Mobile
-              Portfolios &amp; Cross-Functional Engineering Teams. Specialist in
-              Fintech, Banking, Retailand Insurance Domains | Agile &amp; Scalable
-              Architectures.
-            </h3>
+            <h2 className="hero-typed-role">
+              <span className="typed-text">{displayText}</span>
+              <span className="typed-cursor" aria-hidden="true">|</span>
+            </h2>
             <p className="hero-description">
               I&apos;m a results-driven Program Manager &amp; Mobile Technical
               Delivery Leader with over 16 years of experience in driving
@@ -25,12 +37,7 @@ const Hero = () => {
               solutions for global enterprises. I specialize in orchestrating
               end-to-end delivery across iOS, Android, and React Native
               platforms, leveraging expertise in mobile architecture, agile
-              execution, and cross-functional leadership. My proven track record
-              includes managing large, high-impact programs, optimizing
-              delivery processes, and aligning engineering outcomes with
-              business goals. I excel at executing multiple concurrent
-              projects with a strong focus on quality, performance, and
-              operational efficiency.
+              execution, and cross-functional leadership.
             </p>
           </div>
 
