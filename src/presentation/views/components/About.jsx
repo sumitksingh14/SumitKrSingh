@@ -14,16 +14,27 @@ const About = () => {
           <ScrollReveal>
             <div className="about-photo-col">
               <div className="about-photo-wrap">
+                {/* Top-left badge: location */}
+                <div className="about-photo-badge-top">
+                  <span className="about-badge-top-text">📍 Pune, India</span>
+                </div>
+
                 <img
                   src="/sumit_casual.png"
                   alt="Full pose of Sumit Kumar Singh"
                   className="about-photo"
                   loading="lazy"
                 />
-                <div className="about-photo-offset" />
+
+                {/* Bottom-right badge: availability */}
+                <div className="about-photo-badge">
+                  <span className="about-badge-dot" />
+                  <span className="about-badge-text">Open to Work</span>
+                </div>
               </div>
             </div>
           </ScrollReveal>
+
 
           {/* Right: Content */}
           <ScrollReveal delay={150}>
