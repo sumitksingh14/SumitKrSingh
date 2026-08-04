@@ -332,10 +332,36 @@ export const testimonials = [
 ];
 
 export const certifications = [
-  { name: 'PMP', fullName: 'Project Management Professional', issuer: 'PMI', iconStr: 'Award' },
-  { name: 'CSM', fullName: 'Certified ScrumMaster', issuer: 'Scrum Alliance', iconStr: 'Shield' },
-  { name: 'AWS CCP', fullName: 'AWS Cloud Practitioner', issuer: 'Amazon Web Services', iconStr: 'Cloud' },
-  { name: 'SAFe', fullName: 'SAFe Agilist', issuer: 'Scaled Agile', iconStr: 'Kanban' },
+  {
+    name: 'AI Fluency: Framework & Foundations',
+    issuer: 'Anthropic',
+    issuerLogo: 'https://upload.wikimedia.org/wikipedia/commons/7/78/Anthropic_logo.svg',
+    description: 'Learn to collaborate with AI systems effectively, efficiently, ethically, and safely. Covers practical AI interaction skills with Claude.',
+    verifyUrl: 'https://verify.skilljar.com/c/z63q6se9zugh',
+    iconStr: 'BrainCircuit',
+    year: '2025',
+    badge: 'Verified',
+  },
+  {
+    name: 'Claude Platform 101',
+    issuer: 'Anthropic',
+    issuerLogo: 'https://upload.wikimedia.org/wikipedia/commons/7/78/Anthropic_logo.svg',
+    description: 'Building on the Claude Platform from the ground up — API requests, agent loops, tool use, context management, and production agents.',
+    verifyUrl: 'https://verify.skilljar.com/c/nksdoy7h6zw3',
+    iconStr: 'Code2',
+    year: '2025',
+    badge: 'Verified',
+  },
+  {
+    name: 'SAFe (Scaled Agile Framework) Overview',
+    fullName: 'SAFe (Scaled Agile Framework) Overview',
+    issuer: 'Udemy — Agile Enterprise Coach London',
+    description: 'Comprehensive overview of the Scaled Agile Framework (SAFe) covering Lean-Agile principles, PI Planning, ART execution, and enterprise agility practices. 3 hours · 35 lectures.',
+    verifyUrl: 'https://www.udemy.com/certificate/UC-540ccbc8-d587-4ef6-9dc3-0e3a833f550c/',
+    iconStr: 'Kanban',
+    year: '2026',
+    badge: 'Verified',
+  },
 ];
 
 export const thoughts = [

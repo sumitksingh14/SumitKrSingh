@@ -4,6 +4,7 @@ import StatsBanner from './presentation/views/components/StatsBanner';
 import About from './presentation/views/components/About';
 import Skills from './presentation/views/components/Services';
 import Experience from './presentation/views/components/Experience';
+import Certifications from './presentation/views/components/Certifications';
 import Portfolio from './presentation/views/components/Portfolio';
 import Testimonials from './presentation/views/components/Testimonials';
 import Contact from './presentation/views/components/Contact';
@@ -22,6 +23,7 @@ function App() {
         <About />
         <Skills />
         <Experience />
+        <Certifications />
         <Portfolio />
         <Testimonials />
         <Contact />
