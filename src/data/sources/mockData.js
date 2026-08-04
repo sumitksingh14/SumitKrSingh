@@ -6,6 +6,20 @@ export const projects = [
       'Led the end-to-end delivery of a secure enterprise mobile platform for Catalent, integrating Salesforce and Azure AD. Orchestrated architecture, managed cross-functional teams, and ensured engineering excellence via CI/CD, automated testing, and strict security compliance.',
     tags: ['Solution Architecture', 'Mobile Enterprise', 'Azure AD', 'Salesforce', 'Technical Leadership'],
     role: 'Technical Program Manager',
+    client: 'Catalent (US Pharma)',
+    duration: '18 months',
+    teamSize: '30+ Engineers',
+    outcomes: [
+      'Delivered a secure, zero-downtime enterprise workspace adopted by 5,000+ employees globally.',
+      'Integrated Salesforce CRM & Azure AD SSO, reducing login friction by 70%.',
+      'Established automated CI/CD pipelines cutting release cycles from 4 weeks to 5 days.',
+      'Achieved 99.9% uptime SLA through robust architecture and proactive monitoring.',
+    ],
+    impact: [
+      { label: 'Users Onboarded', value: '5,000+' },
+      { label: 'Release Cycle Cut', value: '85%' },
+      { label: 'Uptime SLA', value: '99.9%' },
+    ],
     link: null,
   },
   {
@@ -15,6 +29,20 @@ export const projects = [
       'Managed technical and functional delivery of a US-based retail mobile app for Johnson Controls. Aligned business objectives with technology execution, optimizing resource utilization and managing cross-functional iOS, Android, and QA teams.',
     tags: ['Technical Project Management', 'iOS', 'Android', 'Stakeholder Management', 'QA'],
     role: 'Technical Project Manager',
+    client: 'Johnson Controls (US Retail)',
+    duration: '12 months',
+    teamSize: '20+ Engineers',
+    outcomes: [
+      'Delivered cross-platform iOS & Android app within budget and ahead of schedule.',
+      'Implemented robust QA automation suite, reducing regression bugs by 60%.',
+      'Aligned 5 cross-functional teams across US and India through agile ceremonies.',
+      'Improved retail analytics accuracy by 40% through real-time data integration.',
+    ],
+    impact: [
+      { label: 'Bug Reduction', value: '60%' },
+      { label: 'On-Time Delivery', value: '100%' },
+      { label: 'Teams Aligned', value: '5' },
+    ],
     link: null,
   },
   {
@@ -24,6 +52,20 @@ export const projects = [
       'Spearheaded the API Guardrails Program at NiCE Interactive Solutions, building the first API monetization model and automating governance. Reduced review cycles by 50% and improved developer experience through centralized documentation and analytics dashboards.',
     tags: ['API Governance', 'Monetization Strategy', 'Program Management', 'Security', 'Developer Experience'],
     role: 'Program Manager',
+    client: 'NiCE Interactive Solutions',
+    duration: '9 months',
+    teamSize: '12 Engineers',
+    outcomes: [
+      'Built the organisation\'s first API monetization model, unlocking a new revenue stream.',
+      'Automated governance workflows, reducing manual review cycles by 50%.',
+      'Centralised API documentation portal adopted by 200+ internal developers.',
+      'Delivered analytics dashboards providing real-time API usage insights to business stakeholders.',
+    ],
+    impact: [
+      { label: 'Review Cycle Reduction', value: '50%' },
+      { label: 'Developers Onboarded', value: '200+' },
+      { label: 'New Revenue Stream', value: '✓' },
+    ],
     link: null,
   },
   {
@@ -33,6 +75,20 @@ export const projects = [
       'Directed delivery of a UK-based Fintech mobile platform built on React Native and Node.js. Managed client relationships, financial budgeting, and technical process improvements that optimized resources and increased overall delivery efficiency.',
     tags: ['Fintech', 'React Native', 'Node.js', 'Delivery Management', 'Process Optimization'],
     role: 'Delivery Manager',
+    client: 'Nomo (UK Fintech)',
+    duration: '14 months',
+    teamSize: '25+ Engineers',
+    outcomes: [
+      'Directed end-to-end delivery of a PCI-DSS compliant mobile banking platform.',
+      'Optimised resource allocation, improving overall delivery efficiency by 35%.',
+      'Maintained direct C-level client relationships ensuring zero escalations.',
+      'Implemented process improvements that reduced time-to-market for features by 30%.',
+    ],
+    impact: [
+      { label: 'Delivery Efficiency Gain', value: '35%' },
+      { label: 'Time-to-Market Reduction', value: '30%' },
+      { label: 'Escalations', value: 'Zero' },
+    ],
     link: null,
   },
   {
@@ -42,6 +98,20 @@ export const projects = [
       'Architected and led the digital mobile transformation for Citibank across iOS, Android, React Native, and AngularJS. Oversaw solution design, technical delivery, and architectural reviews while coordinating multifaceted development activities.',
     tags: ['Mobile Architecture', 'Solution Design', 'Banking & Finance', 'React Native', 'Client Management'],
     role: 'Mobile Technical Architect',
+    client: 'Citibank (Global Banking)',
+    duration: '24 months',
+    teamSize: '40+ Engineers',
+    outcomes: [
+      'Architected a unified mobile framework spanning iOS, Android, and React Native for global markets.',
+      'Reduced code duplication by 55% through shared component libraries and design systems.',
+      'Led architectural reviews ensuring compliance with banking security and audit standards.',
+      'Enabled scalable multi-region rollouts across 8 countries with a single codebase.',
+    ],
+    impact: [
+      { label: 'Code Reuse Improvement', value: '55%' },
+      { label: 'Countries Deployed', value: '8' },
+      { label: 'Platforms Unified', value: '3' },
+    ],
     link: null,
   },
   {
@@ -51,6 +121,20 @@ export const projects = [
       'Directed the digital migration from a legacy Kony implementation to a modern native Swift and Kotlin architecture. Established a Mobile Center of Excellence (CoE) and managed end-to-end technical delivery and solution design.',
     tags: ['Digital Transformation', 'Native iOS & Android', 'Swift & Kotlin', 'Mobile CoE', 'Banking Apps'],
     role: 'Technical Program Manager',
+    client: 'The Cooperative Bank (UK)',
+    duration: '20 months',
+    teamSize: '35+ Engineers',
+    outcomes: [
+      'Led complete migration from legacy Kony platform to native Swift & Kotlin architecture.',
+      'Founded and scaled the Mobile Centre of Excellence (CoE), upskilling 35+ engineers.',
+      'Improved app store ratings from 2.8★ to 4.5★ post-transformation launch.',
+      'Reduced crash rate by 80% through native performance optimisations and rigorous QA.',
+    ],
+    impact: [
+      { label: 'App Store Rating', value: '4.5★' },
+      { label: 'Crash Rate Reduction', value: '80%' },
+      { label: 'Engineers Upskilled', value: '35+' },
+    ],
     link: null,
   },
   {
@@ -60,6 +144,20 @@ export const projects = [
       'Developed an iOS mobile application for a leading US-based manufacturing and finance client, enabling field engineers to efficiently log time and expenses directly into enterprise systems.',
     tags: ['iOS Development', 'Enterprise Mobility', 'Field Service'],
     role: 'Senior iOS Developer',
+    client: 'US Manufacturing & Finance Client',
+    duration: '8 months',
+    teamSize: '6 Engineers',
+    outcomes: [
+      'Built a native iOS app enabling real-time timesheet and expense logging for field engineers.',
+      'Integrated directly with enterprise ERP systems, eliminating manual data entry errors.',
+      'Delivered offline-first architecture ensuring reliability in low-connectivity field environments.',
+      'Reduced expense processing time by 65% through automated submission workflows.',
+    ],
+    impact: [
+      { label: 'Processing Time Reduction', value: '65%' },
+      { label: 'Data Entry Errors', value: 'Eliminated' },
+      { label: 'Offline Support', value: '100%' },
+    ],
     link: null,
   },
   {
@@ -69,8 +167,22 @@ export const projects = [
       'Engineered an iOS application for a US-based insurance firm, allowing users to immediately notify the insurer of losses or damage, available natively on the US App Store.',
     tags: ['iOS Development', 'Insurance Tech', 'Consumer App'],
     role: 'iOS Developer',
+    client: 'Chubb Insurance (USA)',
+    duration: '6 months',
+    teamSize: '5 Engineers',
+    outcomes: [
+      'Shipped a consumer-grade FNOL iOS app to the US App Store on schedule.',
+      'Enabled instant digital claim notification, reducing average response time by 50%.',
+      'Achieved 4.4★ App Store rating within 3 months of launch.',
+      'Implemented secure media capture (photos/video) for real-time loss documentation.',
+    ],
+    impact: [
+      { label: 'Response Time Reduction', value: '50%' },
+      { label: 'App Store Rating', value: '4.4★' },
+      { label: 'Launch', value: 'On Schedule' },
+    ],
     link: null,
-  }
+  },
 ];
 
 export const experiences = [
