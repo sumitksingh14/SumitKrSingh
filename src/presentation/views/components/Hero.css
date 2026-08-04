@@ -154,10 +154,24 @@
   max-width: 44rem;
 }
 
+.hero-description + .hero-description {
+  margin-top: 0.75rem;
+}
+
 .hero-description strong {
   color: var(--text-primary);
   font-weight: 600;
 }
+
+/* Last paragraph — target opportunity statement */
+.hero-description--highlight {
+  padding: 0.75rem 1rem;
+  background: var(--bg-secondary);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 0.5rem 0.5rem 0;
+  margin-top: 1rem !important;
+}
+
 
 /* ─── Domain chips ─── */
 .hero-domains {

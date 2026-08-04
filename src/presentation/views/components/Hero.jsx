@@ -51,11 +51,29 @@ const Hero = () => {
             </div>
 
             <p className="hero-description">
-              16+ years shaping how enterprises build, ship, and scale mobile products.
-              I bridge the gap between engineering excellence and business outcomes —
-              leading high-performing teams across{' '}
-              <strong>iOS, Android, and React Native</strong>{' '}
-              for some of the world&apos;s largest organizations.
+              I am a <strong>Technical Program Manager</strong> and digital delivery leader
+              with <strong>16+ years of experience</strong> leading complex mobile, fintech,
+              banking, and platform-modernization programs. I bring together technical depth
+              in <strong>iOS, Android, React Native, APIs, and scalable architecture</strong> with
+              pragmatic program leadership across distributed engineering teams.
+            </p>
+            <p className="hero-description">
+              I currently lead concurrent, high-visibility programs spanning a UK fintech
+              platform and a US retail mobile application. My focus is building predictable
+              delivery: clarifying priorities, managing risk and budgets, aligning
+              stakeholders, and helping teams ship high-quality outcomes on time.
+            </p>
+            <p className="hero-description">
+              Across engagements with <strong>Citi, The Co-operative Bank UK, Johnson Controls,
+                NiCE Interactive Solutions, and Nomo Fintech</strong>, I have led digital
+              transformation, mobile modernization, and API governance initiatives —
+              including reducing API review cycles by 30–50%, establishing an API
+              monetization model, and building delivery practices for teams of 10–40+ engineers.
+            </p>
+            <p className="hero-description hero-description--highlight">
+              I am particularly interested in senior program management and consulting
+              opportunities in <strong>fintech, digital lending, API platforms, and
+                enterprise modernization</strong>.
             </p>
           </div>
 
