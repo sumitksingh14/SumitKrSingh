@@ -152,12 +152,15 @@ const Hero = () => {
         </div>
 
         {/* ── Right: Photo ── */}
-        <div className="hero-visual fade-up">
+        <div className="hero-visual fade-up" style={{ maxWidth: '500px', width: '100%' }}>
           <div className="hero-photo-wrap">
             <img
               src="/sumitsingh.png"
               alt="Headshot of Sumit Kumar Singh"
               className="hero-photo"
+              width="360"
+              height="360"
+              style={{ objectPosition: 'top center' }}
             />
             {/* Bottom badge: experience */}
             <div className="hero-photo-badge hero-badge-bottom">
