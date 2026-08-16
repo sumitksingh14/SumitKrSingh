@@ -1,4 +1,4 @@
-import * as Icons from 'lucide-react';
+import { getIcon } from '../../../utils/iconMap';
 import { useStatsViewModel } from '../../viewmodels/useStatsViewModel';
 import { ScrollReveal } from '../hooks/useScrollReveal';
 import './StatsBanner.css';
@@ -14,7 +14,7 @@ const StatsBanner = () => {
         <ScrollReveal>
           <div className="stats-grid">
             {stats.map((stat, idx) => {
-              const IconComponent = Icons[stat.iconStr] || Icons.Star;
+              const IconComponent = getIcon(stat.iconStr);
               return (
                 <div key={idx} className="stat-item">
                   <div className="stat-icon-wrap">

@@ -21,13 +21,13 @@ function App() {
         <Hero />
         <StatsBanner />
         <About />
+        <ThoughtOfTheDay />
         <Skills />
         <Experience />
         <Certifications />
         <Portfolio />
         <Testimonials />
         <Contact />
-        <ThoughtOfTheDay />
       </main>
       <Footer />
       <BackToTop />

@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Sparkles, Pen } from 'lucide-react';
 import { useThoughtsViewModel } from '../../viewmodels/useThoughtsViewModel';
 import './ThoughtOfTheDay.css';
 
@@ -19,7 +19,7 @@ const ThoughtOfTheDay = () => {
           <div className="thoughts-header">
             <span className="section-label">Thought of the Day</span>
             <p className="section-subtitle center-text">
-              Wisdom from the world&rsquo;s greatest minds
+              On engineering, leadership &amp; delivery
             </p>
           </div>
           <div className="thought-skeleton">
@@ -41,7 +41,7 @@ const ThoughtOfTheDay = () => {
         <div className="thoughts-header">
           <span className="section-label">Thought of the Day</span>
           <p className="section-subtitle center-text">
-            Wisdom from the world&rsquo;s greatest minds
+            On engineering, leadership &amp; delivery
           </p>
         </div>
 
@@ -51,11 +51,16 @@ const ThoughtOfTheDay = () => {
               key={idx}
               className={`thought-slide ${idx === activeIndex ? 'active' : ''}`}
             >
-              <div className="thought-card">
+              <div className={`thought-card${thought.personal ? ' thought-card--personal' : ''}`}>
                 <span className="thought-quote-mark">&ldquo;</span>
                 {idx === 0 && (
                   <div className="thought-featured-badge">
                     <Sparkles /> Today&rsquo;s Pick
+                  </div>
+                )}
+                {thought.personal && idx !== 0 && (
+                  <div className="thought-personal-badge">
+                    <Pen /> My Perspective
                   </div>
                 )}
                 <p className="thought-quote-text">

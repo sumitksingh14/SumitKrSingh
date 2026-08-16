@@ -1,4 +1,4 @@
-import * as Icons from 'lucide-react';
+import { getIcon, iconMap } from '../../../utils/iconMap';
 import './Services.css';
 import { useSkillsViewModel } from '../../viewmodels/useSkillsViewModel';
 import { ScrollReveal } from '../hooks/useScrollReveal';
@@ -28,7 +28,7 @@ const Skills = () => {
                 <h3 className="skill-category-title">{category.category}</h3>
                 <div className="skills-grid">
                   {category.items.map((skill, idx) => {
-                    const IconComponent = Icons[skill.iconStr] || Icons.Code;
+                    const IconComponent = getIcon(skill.iconStr, iconMap.Code);
                     return (
                       <div key={idx} className="skill-item">
                         <div className="skill-icon">

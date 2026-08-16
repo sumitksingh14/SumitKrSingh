@@ -16,7 +16,7 @@ export const useThoughtsViewModel = () => {
 
       const [featured, random] = await Promise.all([
         getThoughtOfTheDay.execute(),
-        getRandomThoughts.execute(5),
+        getRandomThoughts.execute(4),
       ]);
 
       setFeaturedThought(featured);

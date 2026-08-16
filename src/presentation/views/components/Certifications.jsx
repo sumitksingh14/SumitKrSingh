@@ -1,5 +1,5 @@
-import * as Icons from 'lucide-react';
-import { ExternalLink } from 'lucide-react';
+import { BadgeCheck, Building2, ExternalLink } from 'lucide-react';
+import { getIcon, iconMap } from '../../../utils/iconMap';
 import { useCertificationsViewModel } from '../../viewmodels/useCertificationsViewModel';
 import { ScrollReveal } from '../hooks/useScrollReveal';
 import './Certifications.css';
@@ -22,7 +22,7 @@ const Certifications = () => {
 
         <div className="certs-grid">
           {certifications.map((cert, idx) => {
-            const IconComponent = Icons[cert.iconStr] || Icons.Award;
+            const IconComponent = getIcon(cert.iconStr, iconMap.Award);
             const isVerified = !!cert.verifyUrl;
 
             return (
@@ -37,7 +37,7 @@ const Certifications = () => {
                     <div className="cert-header-right">
                       {isVerified && (
                         <span className="cert-verified-badge">
-                          <Icons.BadgeCheck size={13} />
+                          <BadgeCheck size={13} />
                           Verified
                         </span>
                       )}
@@ -55,7 +55,7 @@ const Certifications = () => {
 
                   {/* Issuer */}
                   <p className="cert-issuer">
-                    <Icons.Building2 size={13} />
+                    <Building2 size={13} />
                     {cert.issuer}
                   </p>
 
